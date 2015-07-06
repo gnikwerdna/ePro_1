@@ -1,0 +1,11 @@
+
+Enable-Migrations -ContextTypeName ePro.Models.ApplicationDbContext -MigrationsDirectory DB\applicationdbcontext
+Enable-Migrations -ContextTypeName ePro.DB.eProContext -MigrationsDirectory DB\eprocontext
+
+
+add-migration -ConfigurationTypeName ePro.DB.applicationdbcontext.Configuration "initialcreate"
+add-migration -ConfigurationTypeName ePro.DB.eprocontext.Configuration "initialcreate"
+
+update-database -ConfigurationTypeName ePro.DB.applicationdbcontext.Configuration
+update-database -ConfigurationTypeName ePro.DB.eprocontext.Configuration -verbose
+
