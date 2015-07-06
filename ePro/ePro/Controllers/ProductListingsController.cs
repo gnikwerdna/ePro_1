@@ -87,6 +87,7 @@ namespace ePro.Controllers
 
             viewModel.Products = db.Products
                 .Include(i => i.ComplianceForms.Select(c => c.ComplianceCategory))
+                .Where(i=>i.ProductListingID==id.Value)
                 .OrderBy(i => i.ProductName);
 
             if (id != null)

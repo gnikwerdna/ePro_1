@@ -10,6 +10,7 @@ namespace ePro.DB.applicationdbcontext
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+           
             MigrationsDirectory = @"DB\applicationdbcontext";
         }
 
