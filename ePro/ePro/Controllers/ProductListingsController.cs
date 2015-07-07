@@ -111,7 +111,7 @@ namespace ePro.Controllers
                     db.Entry(compliance).Reference(x => x.ComplianceItem).Load();
                 }
 
-                viewModel.Compliances = selectedcomplianceform.Compliances;
+                viewModel.Compliances = selectedcomplianceform.Compliances.OrderBy(x=>x.Order);
             }
             var productcomp = (from p in db.ProductCompliance where p.ProductListingID == id select p);
             ViewBag.productcp = productcomp.ToList();
@@ -183,7 +183,7 @@ namespace ePro.Controllers
             {
                 db.Products.Add(product);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("../FullProductList/Index");
             }
             PopulateAssignedComplianceFormData(product);
             return View(product);
@@ -271,7 +271,7 @@ namespace ePro.Controllers
 
                     db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index/"+id);
                 }
                 catch (RetryLimitExceededException /* dex */)
                 {
@@ -306,7 +306,7 @@ namespace ePro.Controllers
             Product product = db.Products.Find(id);
             db.Products.Remove(product);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("../FullProductList/Index");
         }
 
         protected override void Dispose(bool disposing)

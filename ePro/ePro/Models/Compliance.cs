@@ -14,6 +14,7 @@ namespace ePro.Models
         public int ComplianceFormID { get; set; }
         public int ComplianceitemsID { get; set; }
         public string Description { get; set; }
+        public int Order { get; set; }
         public virtual ComplianceForm ComplianceForm { get; set; }
         public virtual ComplianceItems ComplianceItem { get; set; }
     }

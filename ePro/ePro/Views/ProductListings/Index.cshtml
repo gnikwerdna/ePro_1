@@ -80,7 +80,7 @@
     </h3>
     <table class="table">
         <tr>
-            <th>Name</th>
+            <th>Item</th>
             <th>Description</th>
         </tr>
        
@@ -138,8 +138,11 @@
                               }
 
                           </td>
-                        
-                        
+                           @if (item.ComplianceItem.EndItem == true && blnflag == false)
+                           {
+                               break;
+                           }
+
                     </tr>
                     }
            

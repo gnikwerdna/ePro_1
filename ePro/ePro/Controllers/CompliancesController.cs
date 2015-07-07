@@ -18,7 +18,7 @@ namespace ePro.Controllers
         // GET: Compliances
         public ActionResult Index()
         {
-            var compliance = db.Compliance.Include(c => c.ComplianceForm).Include(c => c.ComplianceItem);
+            var compliance = db.Compliance.OrderBy(y=>y.ComplianceFormID).OrderBy(x=>x.Order).Include(c => c.ComplianceForm).Include(c => c.ComplianceItem);
             return View(compliance.ToList());
         }
 
@@ -50,7 +50,7 @@ namespace ePro.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ComplinanceID,ComplianceFormID,ComplianceitemsID,Description")] Compliance compliance)
+        public ActionResult Create([Bind(Include = "ComplinanceID,ComplianceFormID,ComplianceitemsID,Description,Order")] Compliance compliance)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace ePro.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ComplinanceID,ComplianceFormID,ComplianceitemsID,Description")] Compliance compliance)
+        public ActionResult Edit([Bind(Include = "ComplinanceID,ComplianceFormID,ComplianceitemsID,Description,Order")] Compliance compliance)
         {
             if (ModelState.IsValid)
             {
