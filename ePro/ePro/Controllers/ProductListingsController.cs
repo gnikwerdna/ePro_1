@@ -19,7 +19,7 @@ namespace ePro.Controllers
     {
         private eProContext db = new eProContext();
 
-        private void AddComplianceProduct(int? productid, int? complianceitemid, int checkedvalue)
+        private void AddComplianceProduct(int? productid, int? complianceitemid, int checkedvalue, bool? enditem)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["cmdstrings"].ToString();
             int intreccheck = 0;
@@ -42,6 +42,13 @@ namespace ePro.Controllers
 
 
                         command.Connection.Open();
+
+                        if (enditem == true) 
+                        { 
+                           command.CommandText = "delete  from  [ProductCompliances]   where ProductListingID =" + productid + " and ComplianceItemsID in (select i.ComplianceItemsID from [ComplianceItems]i where i.EndItem =0  and i.ComplianceItemsID >= ComplianceItemsID)"; 
+                             command.ExecuteNonQuery(); 
+                        } 
+
                         command.CommandText = "insert into ProductCompliances (ComplianceItemsID,ProductListingID,Checked) values (" + complianceitemid + "," + productid + "," + checkedvalue + ")";
 
                         command.ExecuteNonQuery();
@@ -73,7 +80,7 @@ namespace ePro.Controllers
 
 
         // GET: Products
-        public ActionResult Index(int? id, int? complianceformID, int? compid)
+        public ActionResult Index(int? id, int? complianceformID, int? compid, bool? enditem)
         {
 
             var viewModel = new ProductIndexData();
@@ -81,7 +88,7 @@ namespace ePro.Controllers
             {
                 int? updprodid = id;
                 int? upcompid = compid;
-                AddComplianceProduct(updprodid, upcompid, 1);
+                AddComplianceProduct(updprodid, upcompid, 1,enditem);
             }
 
 

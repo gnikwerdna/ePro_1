@@ -114,7 +114,7 @@
                                      { 
                                    
                                        
-                                      @Html.ActionLink("Remove compliance", "Index", new { ComplianceFormID = item.ComplianceFormID, compid = item.ComplianceitemsID })
+                                      @Html.ActionLink("Remove compliance", "Index", new { ComplianceFormID = item.ComplianceFormID, compid = item.ComplianceitemsID, enditem = item.ComplianceItem.EndItem })
                                        blnflag =false;
                                     
                                      }
@@ -134,7 +134,7 @@
                           <td>
                               @if (@blnflag ==true)
                               {
-                              @Html.ActionLink("Add compliance", "Index", new { ComplianceFormID = item.ComplianceFormID, compid = item.ComplianceitemsID })
+                              @Html.ActionLink("Add compliance", "Index", new { ComplianceFormID = item.ComplianceFormID, compid = item.ComplianceitemsID, enditem = item.ComplianceItem.EndItem })
                               }
 
                           </td>
