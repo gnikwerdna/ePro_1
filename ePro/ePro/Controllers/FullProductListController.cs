@@ -16,9 +16,34 @@ namespace ePro.Controllers
         private eProContext db = new eProContext();
 
         // GET: FullProductList
-        public ActionResult Index()
+        public ActionResult Index(string Sorting_Order, string Search_Data)
         {
-            return View(db.ProductListings.ToList());
+            ViewBag.SortingName = String.IsNullOrEmpty(Sorting_Order) ? "Name_Description" : ""; 
+           var prodlist = from prods in db.ProductListings select prods; 
+             { 
+                 prodlist = prodlist.Where(prd => prd.ProductName.ToUpper().Contains(Search_Data.ToUpper())); 
+ 
+ 
+ 
+ 
+             } 
+             switch(Sorting_Order) 
+             { 
+                 case "Name_Description": 
+                     prodlist = prodlist.OrderBy(prods => prods.ProductName); 
+                     break; 
+                 default: 
+                      prodlist = prodlist.OrderByDescending(prods => prods.ProductListingID); 
+                      break; 
+ 
+ 
+             } 
+ 
+ 
+             return View(prodlist.ToList()); 
+
+             
+            //return View(db.ProductListings.ToList());
         }
 
         // GET: FullProductList/Details/5
