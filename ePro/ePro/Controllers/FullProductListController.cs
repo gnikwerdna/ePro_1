@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using ePro.DB;
 using ePro.Models;
+using PagedList;
+
+
 
 namespace ePro.Controllers
 {
@@ -16,16 +19,32 @@ namespace ePro.Controllers
         private eProContext db = new eProContext();
 
         // GET: FullProductList
-        public ActionResult Index(string Sorting_Order, string Search_Data)
+        public ActionResult Index(string Sorting_Order, string Search_Data, int? Page_No)
         {
             ViewBag.SortingName = String.IsNullOrEmpty(Sorting_Order) ? "Name_Description" : ""; 
            var prodlist = from prods in db.ProductListings select prods; 
-             { 
-                 prodlist = prodlist.Where(prd => prd.ProductName.ToUpper().Contains(Search_Data.ToUpper())); 
- 
- 
- 
- 
+             {
+                 if (Search_Data != null )
+                 {
+
+                     if (Search_Data.Length > 0)
+                     {
+                         prodlist = prodlist.Where(prd => prd.ProductName.ToUpper().Contains(Search_Data.ToUpper()));
+                     }
+                     else
+                     {
+                         prodlist = prodlist.OrderByDescending(prods => prods.ProductListingID); 
+
+                     }
+                     Page_No = 1;
+
+                 }
+                 else
+                 {
+                     prodlist = prodlist.OrderByDescending(prods => prods.ProductListingID); 
+
+                 }
+  
              } 
              switch(Sorting_Order) 
              { 
@@ -35,15 +54,15 @@ namespace ePro.Controllers
                  default: 
                       prodlist = prodlist.OrderByDescending(prods => prods.ProductListingID); 
                       break; 
- 
- 
-             } 
- 
- 
-             return View(prodlist.ToList()); 
+  
+             }
+             int Size_Of_Page = 4;
+             int No_Of_Page = (Page_No ?? 1);
 
-             
-            //return View(db.ProductListings.ToList());
+
+             return View(prodlist.ToPagedList(No_Of_Page, Size_Of_Page)); 
+             //return View(prodlist.ToList()); 
+             //return View(db.ProductListings.ToList());
         }
 
         // GET: FullProductList/Details/5

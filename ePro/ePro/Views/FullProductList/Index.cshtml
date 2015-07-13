@@ -1,4 +1,10 @@
-﻿@model IEnumerable<ePro.Models.ProductListing>
+﻿@model PagedList<ePro.Models.ProductListing>
+
+
+@using PagedList;
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
 @{
     ViewBag.Title = "All Products";
@@ -7,7 +13,7 @@
 <h2>All Products</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "../products/Create")
 </p>
 @using (Html.BeginForm())
  {
@@ -22,12 +28,7 @@
         <th>
             @Html.ActionLink("Product Name", "Index", new { Sorting_Order = ViewBag.SortingName })
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Source)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ItemCode)
-        </th>
+       
         
         <th></th>
     </tr>
@@ -37,16 +38,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.ProductName)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Source)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ItemCode)
-        </td>
+        
         
         <td>
             @Html.ActionLink("Compliance", "../ProductListings/Index", new { id = item.ProductListingID }) |
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductListingID }) |
+            @Html.ActionLink("Edit", "../products/Edit", new { id=item.ProductListingID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ProductListingID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ProductListingID })
         </td>
@@ -54,3 +50,8 @@
 }
 
 </table>
+<br/>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, Page_No => Url.Action("Index", new { Page_No, Sorting_Order = ViewBag.CurrentSortOrder, Filter_Value = ViewBag.FilterValue }))
+
+

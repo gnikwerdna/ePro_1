@@ -181,7 +181,7 @@ namespace ePro.Controllers
             {
                 db.Products.Add(product);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("../FullProductList/Index");
             }
             PopulateAssignedComplianceFormData(product);
             return View(product);
@@ -269,7 +269,7 @@ namespace ePro.Controllers
 
                     db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("../FullProductList/Index");
                 }
                 catch (RetryLimitExceededException /* dex */)
                 {
