@@ -48,6 +48,21 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.WebForms.DLL</HintPath>
+    </Reference>
+    <Reference Include="MvcReportViewer">
+      <HintPath>..\packages\MvcReportViewer.0.7.0\lib\net45\MvcReportViewer.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -177,6 +192,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductListingsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="DB\applicationdbcontext\201507061100290_initialcreate.cs" />
     <Compile Include="DB\applicationdbcontext\201507061100290_initialcreate.Designer.cs">
       <DependentUpon>201507061100290_initialcreate.cs</DependentUpon>
@@ -229,12 +245,34 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCompliance.cs" />
     <Compile Include="Models\ProductListing.cs" />
+    <Compile Include="ProdList_DS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProdList_DS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ProductListing_DS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductListing_DS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\RptProds.aspx.cs">
+      <DependentUpon>RptProds.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\RptProds.aspx.designer.cs">
+      <DependentUpon>RptProds.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AssignedComplianceData.cs" />
     <Compile Include="ViewModels\AssignedComplianceFormData.cs" />
     <Compile Include="ViewModels\ComplianceDateGroup.cs" />
     <Compile Include="ViewModels\ProductIndexData.cs" />
+    <Compile Include="_ePro_DB_eProContextDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ePro_DB_eProContextDataSet.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -246,8 +284,33 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\cityscape.jpg" />
+    <Content Include="MvcReportViewer.aspx" />
+    <Content Include="MvcReportViewerErrorPage.html" />
+    <Content Include="Reports\RptProds.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ProductListing_DS.xsc">
+      <DependentUpon>ProductListing_DS.xsd</DependentUpon>
+    </Content>
+    <Content Include="ProdList_DS.xsc">
+      <DependentUpon>ProdList_DS.xsd</DependentUpon>
+    </Content>
+    <None Include="ProdList_DS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProdList_DS.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="ProdList_DS.xss">
+      <DependentUpon>ProdList_DS.xsd</DependentUpon>
+    </Content>
+    <None Include="ProductListing_DS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProductListing_DS.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="ProductListing_DS.xss">
+      <DependentUpon>ProductListing_DS.xsd</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\eProductman.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -258,8 +321,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\MvcReportViewer.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\url.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -332,6 +397,18 @@
     <Content Include="Views\FullProductList\Details.cshtml" />
     <Content Include="Views\FullProductList\Edit.cshtml" />
     <Content Include="Views\FullProductList\Index.cshtml" />
+    <Content Include="_ePro_DB_eProContextDataSet.xsc">
+      <DependentUpon>_ePro_DB_eProContextDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Views\Reports\Index.cshtml" />
+    <None Include="_ePro_DB_eProContextDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_ePro_DB_eProContextDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="_ePro_DB_eProContextDataSet.xss">
+      <DependentUpon>_ePro_DB_eProContextDataSet.xsd</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -370,6 +447,9 @@
     <EmbeddedResource Include="DB\eprocontext\201507071129396_initialcreate6.resx">
       <DependentUpon>201507071129396_initialcreate6.cs</DependentUpon>
     </EmbeddedResource>
+    <Content Include="Reports\rptprods.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
