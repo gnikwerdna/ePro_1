@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace ePro {
+namespace ePro.DataSources {
     
     
     /// <summary>
@@ -20,9 +20,9 @@ namespace ePro {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("ProdList_DS")]
+    [global::System.Xml.Serialization.XmlRootAttribute("ProductListing_DS")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class ProdList_DS : global::System.Data.DataSet {
+    public partial class ProductListing_DS : global::System.Data.DataSet {
         
         private ProductListingsDataTable tableProductListings;
         
@@ -30,7 +30,7 @@ namespace ePro {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public ProdList_DS() {
+        public ProductListing_DS() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace ePro {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected ProdList_DS(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected ProductListing_DS(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -127,7 +127,7 @@ namespace ePro {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            ProdList_DS cln = ((ProdList_DS)(base.Clone()));
+            ProductListing_DS cln = ((ProductListing_DS)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -199,9 +199,9 @@ namespace ePro {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "ProdList_DS";
+            this.DataSetName = "ProductListing_DS";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/ProdList_DS.xsd";
+            this.Namespace = "http://tempuri.org/ProductListing_DS.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableProductListings = new ProductListingsDataTable();
@@ -225,7 +225,7 @@ namespace ePro {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            ProdList_DS ds = new ProdList_DS();
+            ProductListing_DS ds = new ProductListing_DS();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -1596,7 +1596,7 @@ namespace ePro {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                ProdList_DS ds = new ProdList_DS();
+                ProductListing_DS ds = new ProductListing_DS();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -3472,7 +3472,7 @@ namespace ePro {
         }
     }
 }
-namespace ePro.ProdList_DSTableAdapters {
+namespace ePro.DataSources.ProductListing_DSTableAdapters {
     
     
     /// <summary>
@@ -3899,7 +3899,7 @@ namespace ePro.ProdList_DSTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(ProdList_DS.ProductListingsDataTable dataTable) {
+        public virtual int Fill(ProductListing_DS.ProductListingsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -3912,9 +3912,9 @@ namespace ePro.ProdList_DSTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual ProdList_DS.ProductListingsDataTable GetData() {
+        public virtual ProductListing_DS.ProductListingsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            ProdList_DS.ProductListingsDataTable dataTable = new ProdList_DS.ProductListingsDataTable();
+            ProductListing_DS.ProductListingsDataTable dataTable = new ProductListing_DS.ProductListingsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -3922,14 +3922,14 @@ namespace ePro.ProdList_DSTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(ProdList_DS.ProductListingsDataTable dataTable) {
+        public virtual int Update(ProductListing_DS.ProductListingsDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(ProdList_DS dataSet) {
+        public virtual int Update(ProductListing_DS dataSet) {
             return this.Adapter.Update(dataSet, "ProductListings");
         }
         
@@ -4986,7 +4986,7 @@ namespace ePro.ProdList_DSTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateUpdatedRows(ProdList_DS dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(ProductListing_DS dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._productListingsTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.ProductListings.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
@@ -5005,7 +5005,7 @@ namespace ePro.ProdList_DSTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateInsertedRows(ProdList_DS dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(ProductListing_DS dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._productListingsTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.ProductListings.Select(null, null, global::System.Data.DataViewRowState.Added);
@@ -5023,7 +5023,7 @@ namespace ePro.ProdList_DSTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateDeletedRows(ProdList_DS dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(ProductListing_DS dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             if ((this._productListingsTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.ProductListings.Select(null, null, global::System.Data.DataViewRowState.Deleted);
@@ -5065,7 +5065,7 @@ namespace ePro.ProdList_DSTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public virtual int UpdateAll(ProdList_DS dataSet) {
+        public virtual int UpdateAll(ProductListing_DS dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }

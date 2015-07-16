@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace ePro {
+namespace ePro.DataSources {
     
     
     /// <summary>
@@ -708,7 +708,7 @@ namespace ePro {
         }
     }
 }
-namespace ePro._ePro_DB_eProContextDataSetTableAdapters {
+namespace ePro.DataSources._ePro_DB_eProContextDataSetTableAdapters {
     
     
     /// <summary>
