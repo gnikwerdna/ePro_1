@@ -82,6 +82,7 @@ namespace ePro.Models
         public int StkUserOnlyNum2 { get; set; }
         public int StkUserOnlyNum3 { get; set; }
         public int StkUserOnlyNum4 { get; set; }
+        public virtual ICollection<File> Files { get; set; }
        
 
 

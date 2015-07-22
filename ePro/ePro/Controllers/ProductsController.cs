@@ -166,7 +166,7 @@ namespace ePro.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductListingID,AddedDate,ProductName,Source")] Product product, string[] selectedComplianceForms)
+        public ActionResult Create([Bind(Include = "ProductListingID,AddedDate,ProductName,Source")] Product product, string[] selectedComplianceForms,HttpPostedFileBase upload)
         {
             if (selectedComplianceForms != null)
             {
@@ -179,6 +179,22 @@ namespace ePro.Controllers
             }
             if (ModelState.IsValid)
             {
+                if (upload != null && upload.ContentLength >0)
+                {
+                    var avatar = new File
+                    {
+                        FileName = System.IO.Path.GetFileName(upload.FileName),
+                        FileType = FileType.Avatar,
+                        ContentType = upload.ContentType
+                    };
+                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                    {
+                        avatar.Content = reader.ReadBytes(upload.ContentLength);
+                    }
+                    product.Files = new List<File> { avatar };
+
+                    
+                }
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("../FullProductList/Index");

@@ -65,6 +65,21 @@ namespace ePro.Controllers
              //return View(db.ProductListings.ToList());
         }
 
+        public ActionResult FileDownload(int fileid)
+        {
+            byte[] fileData;
+            String fileName;
+            var record = from p in db.Files
+                         where p.ProductListingID == fileid
+                         select p;
+            fileData = (byte[])record.First().Content.ToArray();
+            fileName = record.First().FileName;
+
+            return File(fileData, "text", fileName);
+
+
+        }
+
         // GET: FullProductList/Details/5
         public ActionResult Details(int? id)
         {

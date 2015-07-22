@@ -28,7 +28,9 @@
         <th>
             @Html.ActionLink("Product Name", "Index", new { Sorting_Order = ViewBag.SortingName })
         </th>
-       
+       <th>
+           Product file
+       </th>
         
         <th></th>
     </tr>
@@ -38,7 +40,18 @@
         <td>
             @Html.DisplayFor(modelItem => item.ProductName)
         </td>
-        
+        @if(item.Files.Any(f=>f.FileType ==ePro.Models.FileType.Avatar))
+        {
+            <td>
+                @Html.ActionLink("Download", "FileDownload", new { fileid =item.Files.First(f=>f.FileType ==ePro.Models.FileType.Avatar).ProductListingID})
+            </td>
+        }
+        else
+        {
+            <td>
+                No files available
+            </td>
+        }
         
         <td>
             @Html.ActionLink("Compliance", "../ProductListings/Index", new { id = item.ProductListingID }) |

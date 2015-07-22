@@ -239,6 +239,14 @@
     <Compile Include="DB\eprocontext\201507071129396_initialcreate6.Designer.cs">
       <DependentUpon>201507071129396_initialcreate6.cs</DependentUpon>
     </Compile>
+    <Compile Include="DB\eprocontext\201507221034404_initialcreate3.cs" />
+    <Compile Include="DB\eprocontext\201507221034404_initialcreate3.Designer.cs">
+      <DependentUpon>201507221034404_initialcreate3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201507221102537_initialcreate7.cs" />
+    <Compile Include="DB\eprocontext\201507221102537_initialcreate7.Designer.cs">
+      <DependentUpon>201507221102537_initialcreate7.cs</DependentUpon>
+    </Compile>
     <Compile Include="DB\eprocontext\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -248,6 +256,8 @@
     <Compile Include="Models\ComplianceCategory.cs" />
     <Compile Include="Models\ComplianceForm.cs" />
     <Compile Include="Models\ComplianceItems.cs" />
+    <Compile Include="Models\File.cs" />
+    <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Product.cs" />
@@ -483,6 +493,12 @@
     <Content Include="Reports\rptprodcomps.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="DB\eprocontext\201507221034404_initialcreate3.resx">
+      <DependentUpon>201507221034404_initialcreate3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201507221102537_initialcreate7.resx">
+      <DependentUpon>201507221102537_initialcreate7.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
