@@ -18,7 +18,7 @@ namespace ePro.Controllers
         // GET: Compliances
         public ActionResult Index()
         {
-            var compliance = db.Compliance.OrderBy(y=>y.ComplianceFormID).OrderBy(x=>x.Order).Include(c => c.ComplianceForm).Include(c => c.ComplianceItem);
+            var compliance = db.Compliance.OrderBy(y=>y.ComplianceFormID).OrderBy(x=>x.Description).Include(c => c.ComplianceForm).Include(c => c.ComplianceItem);
             return View(compliance.ToList());
         }
 

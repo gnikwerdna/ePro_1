@@ -15,6 +15,7 @@ namespace ePro.DB.eprocontext
                         ComplianceFormID = c.Int(nullable: false),
                         ComplianceitemsID = c.Int(nullable: false),
                         Description = c.String(),
+                        Order = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ComplinanceID)
                 .ForeignKey("dbo.ComplianceForms", t => t.ComplianceFormID, cascadeDelete: true)
@@ -47,7 +48,7 @@ namespace ePro.DB.eprocontext
                 "dbo.ProductListings",
                 c => new
                     {
-                        ProductListingID = c.Int(nullable: false, identity: true),
+                        ProductListingID = c.Long(nullable: false, identity: true),
                         ProductName = c.String(nullable: false),
                         Source = c.String(),
                         ItemCode = c.String(),
@@ -64,18 +65,18 @@ namespace ePro.DB.eprocontext
                         Description2 = c.String(),
                         Description3 = c.String(),
                         Unit = c.String(),
-                        Weight = c.Int(nullable: false),
+                        Weight = c.String(),
                         Pack = c.String(),
-                        PackQty = c.Int(nullable: false),
-                        Volume = c.Int(nullable: false),
-                        ConversionFactor = c.Int(nullable: false),
+                        PackQty = c.String(),
+                        Volume = c.String(),
+                        ConversionFactor = c.String(),
                         AltUnitDesc = c.String(),
                         ItemGTIN = c.String(),
                         ModVAT = c.String(),
                         Trace = c.String(),
                         Storage = c.String(),
-                        StandardCost = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        ReplacementCost = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        StandardCost = c.String(),
+                        ReplacementCost = c.String(),
                         SalesCost = c.String(),
                         DutyPaidCost = c.String(),
                         InfoCost = c.String(),
@@ -112,14 +113,29 @@ namespace ePro.DB.eprocontext
                         StkUserOnlyAlpha42 = c.String(),
                         StkUserOnlyAlpha43 = c.String(),
                         StkUserOnlyAlpha44 = c.String(),
-                        StkUserOnlyNum1 = c.Int(nullable: false),
-                        StkUserOnlyNum2 = c.Int(nullable: false),
-                        StkUserOnlyNum3 = c.Int(nullable: false),
-                        StkUserOnlyNum4 = c.Int(nullable: false),
+                        StkUserOnlyNum1 = c.String(),
+                        StkUserOnlyNum2 = c.String(),
+                        StkUserOnlyNum3 = c.String(),
+                        StkUserOnlyNum4 = c.String(),
                         AddedDate = c.DateTime(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.ProductListingID);
+            
+            CreateTable(
+                "dbo.Files",
+                c => new
+                    {
+                        FileId = c.Int(nullable: false, identity: true),
+                        FileName = c.String(maxLength: 255),
+                        ContentType = c.String(maxLength: 100),
+                        Content = c.Binary(),
+                        FileType = c.Int(nullable: false),
+                        ProductListingID = c.Long(nullable: false),
+                    })
+                .PrimaryKey(t => t.FileId)
+                .ForeignKey("dbo.ProductListings", t => t.ProductListingID, cascadeDelete: true)
+                .Index(t => t.ProductListingID);
             
             CreateTable(
                 "dbo.ComplianceItems",
@@ -127,6 +143,7 @@ namespace ePro.DB.eprocontext
                     {
                         ComplianceItemsID = c.Int(nullable: false, identity: true),
                         ItemName = c.String(),
+                        EndItem = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ComplianceItemsID);
             
@@ -134,12 +151,12 @@ namespace ePro.DB.eprocontext
                 "dbo.ProductCompliances",
                 c => new
                     {
-                        ProductListingID = c.Int(nullable: false),
+                        ProductComplianceID = c.Int(nullable: false, identity: true),
+                        ProductListingID = c.Long(nullable: false),
                         ComplianceItemsID = c.Int(nullable: false),
-                        ProductComplianceID = c.Int(nullable: false),
                         Checked = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.ProductListingID, t.ComplianceItemsID })
+                .PrimaryKey(t => t.ProductComplianceID)
                 .ForeignKey("dbo.ComplianceItems", t => t.ComplianceItemsID, cascadeDelete: true)
                 .ForeignKey("dbo.ProductListings", t => t.ProductListingID, cascadeDelete: true)
                 .Index(t => t.ProductListingID)
@@ -149,7 +166,7 @@ namespace ePro.DB.eprocontext
                 "dbo.ProductComplianceForms",
                 c => new
                     {
-                        Product_ProductListingID = c.Int(nullable: false),
+                        Product_ProductListingID = c.Long(nullable: false),
                         ComplianceForm_ComplianceFormID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.Product_ProductListingID, t.ComplianceForm_ComplianceFormID })
@@ -165,6 +182,7 @@ namespace ePro.DB.eprocontext
             DropForeignKey("dbo.ProductCompliances", "ProductListingID", "dbo.ProductListings");
             DropForeignKey("dbo.ProductCompliances", "ComplianceItemsID", "dbo.ComplianceItems");
             DropForeignKey("dbo.Compliances", "ComplianceitemsID", "dbo.ComplianceItems");
+            DropForeignKey("dbo.Files", "ProductListingID", "dbo.ProductListings");
             DropForeignKey("dbo.ProductComplianceForms", "ComplianceForm_ComplianceFormID", "dbo.ComplianceForms");
             DropForeignKey("dbo.ProductComplianceForms", "Product_ProductListingID", "dbo.ProductListings");
             DropForeignKey("dbo.Compliances", "ComplianceFormID", "dbo.ComplianceForms");
@@ -173,12 +191,14 @@ namespace ePro.DB.eprocontext
             DropIndex("dbo.ProductComplianceForms", new[] { "Product_ProductListingID" });
             DropIndex("dbo.ProductCompliances", new[] { "ComplianceItemsID" });
             DropIndex("dbo.ProductCompliances", new[] { "ProductListingID" });
+            DropIndex("dbo.Files", new[] { "ProductListingID" });
             DropIndex("dbo.ComplianceForms", new[] { "ComplianceCategoryID" });
             DropIndex("dbo.Compliances", new[] { "ComplianceitemsID" });
             DropIndex("dbo.Compliances", new[] { "ComplianceFormID" });
             DropTable("dbo.ProductComplianceForms");
             DropTable("dbo.ProductCompliances");
             DropTable("dbo.ComplianceItems");
+            DropTable("dbo.Files");
             DropTable("dbo.ProductListings");
             DropTable("dbo.ComplianceCategories");
             DropTable("dbo.ComplianceForms");

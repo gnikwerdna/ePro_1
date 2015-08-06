@@ -9,7 +9,7 @@ namespace ePro.Models
     public class ProductListing
     {
         [Key]
-        public int ProductListingID { get; set; }
+        public long ProductListingID { get; set; }
         [Required]
         [Display(Name = "Product Name")]
         public string ProductName { get; set; }
@@ -30,18 +30,18 @@ namespace ePro.Models
         public string Description2 { get; set; }
         public string Description3 { get; set; }
         public string Unit { get; set; }
-        public int Weight { get; set; }
+        public string Weight { get; set; }
         public string Pack { get; set; }
-        public int PackQty { get; set; }
-        public int Volume { get; set; }
-        public int ConversionFactor { get; set; }
+        public string PackQty { get; set; }
+        public string Volume { get; set; }
+        public string ConversionFactor { get; set; }
         public string AltUnitDesc { get; set; }
         public string ItemGTIN { get; set; }
         public string ModVAT { get; set; }
         public string Trace { get; set; }
         public string Storage { get; set; }
-        public decimal StandardCost { get; set; }
-        public decimal ReplacementCost { get; set; }
+        public string StandardCost { get; set; }
+        public string ReplacementCost { get; set; }
         public string SalesCost { get; set; }
         public string DutyPaidCost { get; set; }
         public string InfoCost { get; set; }
@@ -78,10 +78,10 @@ namespace ePro.Models
         public string StkUserOnlyAlpha42 { get; set; }
         public string StkUserOnlyAlpha43 { get; set; }
         public string StkUserOnlyAlpha44 { get; set; }
-        public int StkUserOnlyNum1 { get; set; }
-        public int StkUserOnlyNum2 { get; set; }
-        public int StkUserOnlyNum3 { get; set; }
-        public int StkUserOnlyNum4 { get; set; }
+        public string StkUserOnlyNum1 { get; set; }
+        public string StkUserOnlyNum2 { get; set; }
+        public string StkUserOnlyNum3 { get; set; }
+        public string StkUserOnlyNum4 { get; set; }
         public virtual ICollection<File> Files { get; set; }
        
 

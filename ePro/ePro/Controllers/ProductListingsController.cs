@@ -18,6 +18,20 @@ namespace ePro.Controllers
     public class ProductListingsController : Controller
     {
         private eProContext db = new eProContext();
+        private int CheckRelProductComplianceForms(int id)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["cmdstrings"].ToString();
+            int intreccheck = 0;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand cmdchk = new SqlCommand("Select count(*) from [ProductComplianceForms] where [Product_ProductListingID]=" + id, connection))
+            {
+                cmdchk.Connection.Open();
+                intreccheck = (int)cmdchk.ExecuteScalar();
+                cmdchk.Connection.Close();
+            }
+            return intreccheck;
+
+        }
 
         private void AddComplianceProduct(int? productid, int? complianceitemid, int checkedvalue, bool? enditem)
         {
@@ -99,9 +113,28 @@ namespace ePro.Controllers
 
             if (id != null)
             {
-                ViewBag.ProductID = id.Value;
-                viewModel.ComplianceForms = viewModel.Products.Where(
-                    i => i.ProductListingID == id.Value).Single().ComplianceForms;
+                int idval = 0;
+                idval =  id.GetValueOrDefault();
+               
+                if (CheckRelProductComplianceForms(idval) > 0)
+                {
+                    ViewBag.ProductID = id.Value;
+                    viewModel.ComplianceForms = viewModel.Products.Where(
+                        i => i.ProductListingID == id.Value).FirstOrDefault().ComplianceForms;
+                }
+                else
+                {
+                    try
+                    {
+                        ViewBag.ProductID = id.Value;
+                        viewModel.ComplianceForms = viewModel.Products.Where(i => i.ProductListingID == id.Value).FirstOrDefault().ComplianceForms;
+                    }
+                    catch(Exception ex)
+                    {
+
+                    }
+                }
+                
             }
 
             if (complianceformID != null)

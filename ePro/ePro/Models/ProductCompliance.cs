@@ -13,7 +13,7 @@ namespace ePro.Models
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int ProductComplianceID { get; set; }
-        public int ProductListingID { get; set; }
+        public long ProductListingID { get; set; }
         public int ComplianceItemsID { get; set; }
         public int Checked { get; set; }
         public virtual Product Product { get; set; }

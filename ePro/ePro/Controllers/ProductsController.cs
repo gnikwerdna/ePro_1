@@ -18,10 +18,23 @@ namespace ePro.Controllers
     public class ProductsController : Controller
     {
         private eProContext db = new eProContext();
-
-       private void AddComplianceProduct(int? productid, int? complianceitemid, int checkedvalue)
+        private int CheckRelProductComplianceForms(int id) 
         {
             string connectionString = ConfigurationManager.ConnectionStrings["cmdstrings"].ToString();
+            int intreccheck = 0;
+             using (SqlConnection connection =new SqlConnection(connectionString))
+             using (SqlCommand cmdchk = new SqlCommand("Select counselect count(*) from [ProductComplianceForms] where [Product_ProductListingID]="+id,connection))
+             {
+                  cmdchk.Connection.Open();
+                  intreccheck = (int)cmdchk.ExecuteScalar();
+                  cmdchk.Connection.Close();
+             }
+             return intreccheck;
+
+        }
+       private void AddComplianceProduct(int? productid, int? complianceitemid, int checkedvalue)
+        {
+           string connectionString = ConfigurationManager.ConnectionStrings["cmdstrings"].ToString();
            int intreccheck=0;
            
        
@@ -148,7 +161,9 @@ namespace ePro.Controllers
         private void PopulateAssignedComplianceFormData(Product product)
         {
             var allcomplianceforms = db.ComplianceForms;
-            var ProductComplianceForms = new HashSet<int>(product.ComplianceForms.Select(c => c.ComplianceFormID));
+           
+                var ProductComplianceForms = new HashSet<int>(product.ComplianceForms.Select(c => c.ComplianceFormID));
+           
             var viewModel = new List<AssignedComplianceFormData>();
             foreach (var complianceform in allcomplianceforms)
             {
@@ -244,7 +259,7 @@ namespace ePro.Controllers
                
                 .Include(i => i.ComplianceForms)
                 .Where(i => i.ProductListingID == id)
-                .Single();
+                .SingleOrDefault();
             PopulateAssignedComplianceFormData(product);
             if (product == null)
             {
@@ -258,7 +273,8 @@ namespace ePro.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int? id, string[] selectedComplinanceform)
+       // public ActionResult Edit(int? id, [Bind(Include = "ProductListingID,AddedDate,ProductName,Source")] Product product, string[] selectedComplinanceform, HttpPostedFileBase upload)
+       public ActionResult Edit(int? id, string[] selectedComplinanceform,HttpPostedFileBase upload)
         {
 
             if (id == null)
@@ -280,7 +296,22 @@ namespace ePro.Controllers
                     //   {
                     //       instructorToUpdate.OfficeAssignment = null;
                     //   }
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        var avatar = new File
+                        {
+                            FileName = System.IO.Path.GetFileName(upload.FileName),
+                            FileType = FileType.Avatar,
+                            ContentType = upload.ContentType
+                        };
+                        using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                        {
+                            avatar.Content = reader.ReadBytes(upload.ContentLength);
+                        }
+                        ProductToUpdate.Files = new List<File> { avatar };
 
+
+                    }
                     UpdateProduct(selectedComplinanceform, ProductToUpdate);
 
                     db.SaveChanges();

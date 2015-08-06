@@ -201,51 +201,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProdCompDS.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DB\applicationdbcontext\201507061100290_initialcreate.cs" />
-    <Compile Include="DB\applicationdbcontext\201507061100290_initialcreate.Designer.cs">
-      <DependentUpon>201507061100290_initialcreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DB\applicationdbcontext\201507061108154_initialcreate1.cs" />
-    <Compile Include="DB\applicationdbcontext\201507061108154_initialcreate1.Designer.cs">
-      <DependentUpon>201507061108154_initialcreate1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DB\applicationdbcontext\201507061116051_initialcreate4.cs" />
-    <Compile Include="DB\applicationdbcontext\201507061116051_initialcreate4.Designer.cs">
-      <DependentUpon>201507061116051_initialcreate4.cs</DependentUpon>
+    <Compile Include="DB\applicationdbcontext\201508010624543_initialcreate.cs" />
+    <Compile Include="DB\applicationdbcontext\201508010624543_initialcreate.Designer.cs">
+      <DependentUpon>201508010624543_initialcreate.cs</DependentUpon>
     </Compile>
     <Compile Include="DB\applicationdbcontext\Configuration.cs" />
     <Compile Include="DB\eProContext.cs" />
-    <Compile Include="DB\eprocontext\201507061100459_initialcreate.cs" />
-    <Compile Include="DB\eprocontext\201507061100459_initialcreate.Designer.cs">
-      <DependentUpon>201507061100459_initialcreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DB\eprocontext\201507061109468_initialcreate1.cs" />
-    <Compile Include="DB\eprocontext\201507061109468_initialcreate1.Designer.cs">
-      <DependentUpon>201507061109468_initialcreate1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DB\eprocontext\201507061113159_initialcreate2.cs" />
-    <Compile Include="DB\eprocontext\201507061113159_initialcreate2.Designer.cs">
-      <DependentUpon>201507061113159_initialcreate2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DB\eprocontext\201507061116223_initialcreate4.cs" />
-    <Compile Include="DB\eprocontext\201507061116223_initialcreate4.Designer.cs">
-      <DependentUpon>201507061116223_initialcreate4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DB\eprocontext\201507071043100_initialcreate5.cs" />
-    <Compile Include="DB\eprocontext\201507071043100_initialcreate5.Designer.cs">
-      <DependentUpon>201507071043100_initialcreate5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DB\eprocontext\201507071129396_initialcreate6.cs" />
-    <Compile Include="DB\eprocontext\201507071129396_initialcreate6.Designer.cs">
-      <DependentUpon>201507071129396_initialcreate6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DB\eprocontext\201507221034404_initialcreate3.cs" />
-    <Compile Include="DB\eprocontext\201507221034404_initialcreate3.Designer.cs">
-      <DependentUpon>201507221034404_initialcreate3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DB\eprocontext\201507221102537_initialcreate7.cs" />
-    <Compile Include="DB\eprocontext\201507221102537_initialcreate7.Designer.cs">
-      <DependentUpon>201507221102537_initialcreate7.cs</DependentUpon>
+    <Compile Include="DB\eprocontext\201508010625104_initialcreate.cs" />
+    <Compile Include="DB\eprocontext\201508010625104_initialcreate.Designer.cs">
+      <DependentUpon>201508010625104_initialcreate.cs</DependentUpon>
     </Compile>
     <Compile Include="DB\eprocontext\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -300,10 +264,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ePro.mdf" />
-    <Content Include="App_Data\ePro_log.ldf">
-      <DependentUpon>ePro.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
@@ -351,6 +311,7 @@
       <DependentUpon>ProductListing_DS.xsd</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\eProductman.pubxml" />
+    <None Include="Properties\PublishProfiles\ManualDeploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -365,7 +326,9 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\url.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -452,7 +415,9 @@
     <Content Include="Views\ReportProductsAll\Index.cshtml" />
     <Content Include="Views\Help\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -460,44 +425,19 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DB\applicationdbcontext\201507061100290_initialcreate.resx">
-      <DependentUpon>201507061100290_initialcreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DB\applicationdbcontext\201507061108154_initialcreate1.resx">
-      <DependentUpon>201507061108154_initialcreate1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DB\applicationdbcontext\201507061116051_initialcreate4.resx">
-      <DependentUpon>201507061116051_initialcreate4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DB\eprocontext\201507061100459_initialcreate.resx">
-      <DependentUpon>201507061100459_initialcreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DB\eprocontext\201507061109468_initialcreate1.resx">
-      <DependentUpon>201507061109468_initialcreate1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DB\eprocontext\201507061113159_initialcreate2.resx">
-      <DependentUpon>201507061113159_initialcreate2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DB\eprocontext\201507061116223_initialcreate4.resx">
-      <DependentUpon>201507061116223_initialcreate4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DB\eprocontext\201507071043100_initialcreate5.resx">
-      <DependentUpon>201507071043100_initialcreate5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DB\eprocontext\201507071129396_initialcreate6.resx">
-      <DependentUpon>201507071129396_initialcreate6.cs</DependentUpon>
-    </EmbeddedResource>
     <Content Include="Reports\rptprods.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\rptprodcomps.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="DB\eprocontext\201507221034404_initialcreate3.resx">
-      <DependentUpon>201507221034404_initialcreate3.cs</DependentUpon>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DB\applicationdbcontext\201508010624543_initialcreate.resx">
+      <DependentUpon>201508010624543_initialcreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DB\eprocontext\201507221102537_initialcreate7.resx">
-      <DependentUpon>201507221102537_initialcreate7.cs</DependentUpon>
+    <EmbeddedResource Include="DB\eprocontext\201508010625104_initialcreate.resx">
+      <DependentUpon>201508010625104_initialcreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
