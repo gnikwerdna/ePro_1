@@ -21,15 +21,17 @@ namespace ePro.Controllers
         // GET: FullProductList
         public ActionResult Index(string Sorting_Order, string Search_Data, int? Page_No)
         {
-            ViewBag.SortingName = String.IsNullOrEmpty(Sorting_Order) ? "Name_Description" : ""; 
+            ViewBag.SortingName = String.IsNullOrEmpty(Sorting_Order) ? "Name_Description" : "";
+            ViewBag.SortingGroup = Sorting_Order == "Group";
            var prodlist = from prods in db.ProductListings select prods; 
+           
              {
                  if (Search_Data != null )
                  {
 
                      if (Search_Data.Length > 0)
                      {
-                         prodlist = prodlist.Where(prd => prd.ProductName.ToUpper().Contains(Search_Data.ToUpper()));
+                         prodlist = prodlist.Where(prd => prd.Group.ToUpper().Contains(Search_Data.ToUpper()));
                      }
                      else
                      {
@@ -51,6 +53,9 @@ namespace ePro.Controllers
                  case "Name_Description": 
                      prodlist = prodlist.OrderBy(prods => prods.ProductName); 
                      break; 
+                 case "Group":
+                    prodlist = prodlist.OrderBy(prods => prods.Group);
+                    break; 
                  default: 
                       prodlist = prodlist.OrderByDescending(prods => prods.ProductListingID); 
                       break; 
@@ -58,9 +63,10 @@ namespace ePro.Controllers
              }
              int Size_Of_Page = 4;
              int No_Of_Page = (Page_No ?? 1);
-
-
+           
+          
              return View(prodlist.ToPagedList(No_Of_Page, Size_Of_Page)); 
+           
              //return View(prodlist.ToList()); 
              //return View(db.ProductListings.ToList());
         }

@@ -12,11 +12,14 @@ using ePro.ViewModels;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Configuration;
+using PagedList;
+
 
 namespace ePro.Controllers
 {
     public class ProductsController : Controller
     {
+       
         private eProContext db = new eProContext();
         private int CheckRelProductComplianceForms(int id) 
         {
@@ -86,9 +89,16 @@ namespace ePro.Controllers
 
 
         // GET: Products
-        public ActionResult Index(int? id,  int? complianceformID, int? compid)
+       public ActionResult Index(string Compliance_Sorting_Order, string Search_Data, int? id, int? complianceformID, int? compid, int? InstructoPage, int? CoursePage, int? EnrollmentPage)
         {
 
+            int instructPageNumber = (InstructoPage?? 1);
+            int CoursePageNumber = (CoursePage?? 1);
+            int EnrollmentPageNumber = (EnrollmentPage?? 1);
+
+           ViewBag.CurrentSort = Compliance_Sorting_Order;
+            ViewBag.SortingCompliance = String.IsNullOrEmpty(Compliance_Sorting_Order) ? "ComplianceForm" : "";
+           // ViewBag.SortingCompliance = Compliance_Sorting_Order == "ComplianceForm";
             var viewModel = new ProductIndexData();
             if (compid!=null)
             {
@@ -96,16 +106,36 @@ namespace ePro.Controllers
                 int? upcompid = compid;
                 AddComplianceProduct(updprodid, upcompid, 1);
             }
-          
-            
-            viewModel.Products = db.Products 
+            switch (Compliance_Sorting_Order)
+            {
+                case "ComplianceForm":
+
+                  viewModel.Products = db.Products
                 .Include(i => i.ComplianceForms.Select(c => c.ComplianceCategory))
-                .OrderBy(i => i.ProductName);
+               .OrderByDescending(i => i.ComplianceForms.Count);
+                    break;
+                                  
+                default:
+                    viewModel.Products = db.Products
+                    .Include(i => i.ComplianceForms.Select(c => c.ComplianceCategory))
+                     .OrderBy(i => i.ProductName);
+                    break;
+
+            }
+            if (Search_Data != null)
+            {
+                viewModel.Products = db.Products.Where(i => i.ProductName == Search_Data) ;
+
+            }
+            
+           // viewModel.Products = db.Products 
+          //      .Include(i => i.ComplianceForms.Select(c => c.ComplianceCategory))
+          //      .OrderBy(i => i.ProductName);
             if (id != null)
             {
                 ViewBag.ProductID = id.Value;
                 viewModel.ComplianceForms = viewModel.Products.Where(
-                    i => i.ProductListingID == id.Value).Single().ComplianceForms;
+                    i => i.ProductListingID == id.Value).Single().ComplianceForms ;
             }
 
             if (complianceformID != null)
@@ -125,12 +155,16 @@ namespace ePro.Controllers
                 viewModel.Compliances = selectedcomplianceform.Compliances;
             }
             var productcomp = (from p in db.ProductCompliance where p.ProductListingID == id select p);
-            ViewBag.productcp = productcomp.ToList();
+           ViewBag.productcp = productcomp.ToList();
           
             var proditems = from a in db.ProductCompliance select a;
             ViewBag.ProdItems = new SelectList(proditems, "ProductListingID", "ProductName");
-
-            return View(viewModel);
+           
+           // return View(viewModel);
+            //.ToPagedList(No_Of_Page, Size_Of_Page)
+           ViewBag.prdscomps = viewModel.Products.ToPagedList(EnrollmentPageNumber, 5);
+            return View(viewModel); 
+           
         }
 
         // GET: Products/Details/5

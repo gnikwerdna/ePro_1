@@ -1,5 +1,10 @@
 ﻿@model ePro.ViewModels.ProductIndexData
 
+@using PagedList;
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "Index";
 }
@@ -8,10 +13,20 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm())
+{
+    <p>
+        Type in a product name: @Html.TextBox("Search_Data", ViewBag.FilterValue as string)
+        <input type="submit" value="Find" />
+    </p>
+
+}
 <table class="table">
     <tr>
         <th>Product Name</th>
-        
+        <th>
+            @Html.ActionLink("Compliance Form", "Index", new { Compliance_Sorting_Order = ViewBag.SortingCompliance })
+        </th>
         <th></th>
     </tr>
     @foreach (var item in Model.Products)
@@ -25,6 +40,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ProductName)
              </td>
+            <td>
+            
+                @if (@item.ComplianceForms.Count>= 1)
+                {
+                    <p>Yes</p>
+                }
+                else
+                {
+                    <p>No</p>
+                }
+               
+            </td>
            
             <td>
                 @Html.ActionLink("Select", "Index", new { id = item.ProductListingID }) |
@@ -36,9 +63,10 @@
             @{ long prodid = item.ProductListingID;}
 
          </tr>  
-
+       
     }
 </table>
+
 
 
 @if (Model.ComplianceForms != null)
@@ -145,5 +173,15 @@
            
         }
     </table>
+  
+    
+}  
+<div>
+
    
-}    
+    Page @(ViewBag.prdscomps.PageCount < ViewBag.prdscomps.PageNumber ? 0 : ViewBag.prdscomps.PageNumber) of @ViewBag.prdscomps.PageCount
+   
+
+</div>
+
+

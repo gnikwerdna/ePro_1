@@ -18,9 +18,10 @@
 @using (Html.BeginForm())
  {
      <p>
-         Type in product name: @Html.TextBox("Search_Data", ViewBag.FilterValue as string)
+         Type in a group name: @Html.TextBox("Search_Data", ViewBag.FilterValue as string)
          <input type="submit" value="Find" />
      </p>
+    
  }
 
 <table class="table">
@@ -28,6 +29,10 @@
         <th>
             @Html.ActionLink("Product Name", "Index", new { Sorting_Order = ViewBag.SortingName })
         </th>
+        <th>
+            @Html.ActionLink("Group", "Index", new { Group_Sorting_Order = ViewBag.SortingGroup })
+        </th>
+       
        <th>
            Product file
        </th>
@@ -40,7 +45,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.ProductName)
         </td>
-        @if(item.Files.Any(f=>f.FileType ==ePro.Models.FileType.Avatar))
+        <td>
+            @Html.DisplayFor(modelItem => item.Group)
+
+        </td>
+                   
+        if (item.Files.Any(f=>f.FileType ==ePro.Models.FileType.Avatar))
         {
             <td>
                 @Html.ActionLink("Download", "FileDownload", new { fileid =item.Files.First(f=>f.FileType ==ePro.Models.FileType.Avatar).ProductListingID})
