@@ -177,10 +177,11 @@
     
 }  
 <div>
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+    Page @ViewBag.PageNumber of @ViewBag.TotalPages
 
-   
-    Page @(ViewBag.prdscomps.PageCount < ViewBag.prdscomps.PageNumber ? 0 : ViewBag.prdscomps.PageNumber) of @ViewBag.prdscomps.PageCount
-   
+    @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Index", new { page }))
+
 
 </div>
 

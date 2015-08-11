@@ -50,12 +50,21 @@
 
         </td>
                    
-        if (item.Files.Any(f=>f.FileType ==ePro.Models.FileType.Avatar))
+        @if (item.Files.Any(f=>f.FileType ==ePro.Models.FileType.Avatar))
         {
+            if (item.Files.First(f=>f.FileType ==ePro.Models.FileType.Avatar).ProductListingID!=0 )
+            {   
             <td>
-                @Html.ActionLink("Download", "FileDownload", new { fileid =item.Files.First(f=>f.FileType ==ePro.Models.FileType.Avatar).ProductListingID})
+                @Html.ActionLink("Download", "FileDownload", new { fileid = item.Files.First(f => f.FileType == ePro.Models.FileType.Avatar).ProductListingID })
             </td>
-        }
+            }
+           else
+            {
+            <td>
+                No files available
+            </td>
+            }
+         }
         else
         {
             <td>

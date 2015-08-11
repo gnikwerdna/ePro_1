@@ -213,6 +213,10 @@
     <Compile Include="DB\eprocontext\201508010625104_initialcreate.Designer.cs">
       <DependentUpon>201508010625104_initialcreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="DB\eprocontext\201508110957383_initialcreate1.cs" />
+    <Compile Include="DB\eprocontext\201508110957383_initialcreate1.Designer.cs">
+      <DependentUpon>201508110957383_initialcreate1.cs</DependentUpon>
+    </Compile>
     <Compile Include="DB\eprocontext\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -416,6 +420,7 @@
     <Content Include="Views\ReportProductComplies\Index.cshtml" />
     <Content Include="Views\ReportProductsAll\Index.cshtml" />
     <Content Include="Views\Help\Index.cshtml" />
+    <Content Include="Views\ProductCompliance\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -440,6 +445,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DB\eprocontext\201508010625104_initialcreate.resx">
       <DependentUpon>201508010625104_initialcreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508110957383_initialcreate1.resx">
+      <DependentUpon>201508110957383_initialcreate1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

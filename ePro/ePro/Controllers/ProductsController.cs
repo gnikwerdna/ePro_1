@@ -89,17 +89,17 @@ namespace ePro.Controllers
 
 
         // GET: Products
-       public ActionResult Index(string Compliance_Sorting_Order, string Search_Data, int? id, int? complianceformID, int? compid, int? InstructoPage, int? CoursePage, int? EnrollmentPage)
+       public ActionResult Index(string Compliance_Sorting_Order, string Search_Data, int? id, int? complianceformID, int? compid, int? page)
         {
 
-            int instructPageNumber = (InstructoPage?? 1);
-            int CoursePageNumber = (CoursePage?? 1);
-            int EnrollmentPageNumber = (EnrollmentPage?? 1);
+            int pageSize = 14;
+            int pageNumber = (page ?? 1);
 
-           ViewBag.CurrentSort = Compliance_Sorting_Order;
-            ViewBag.SortingCompliance = String.IsNullOrEmpty(Compliance_Sorting_Order) ? "ComplianceForm" : "";
+            ViewBag.CurrentSort = Compliance_Sorting_Order;
+           ViewBag.SortingCompliance = String.IsNullOrEmpty(Compliance_Sorting_Order) ? "ComplianceForm" : "";
            // ViewBag.SortingCompliance = Compliance_Sorting_Order == "ComplianceForm";
             var viewModel = new ProductIndexData();
+            
             if (compid!=null)
             {
                 int? updprodid = id;
@@ -116,8 +116,10 @@ namespace ePro.Controllers
                     break;
                                   
                 default:
-                    viewModel.Products = db.Products
+                    viewModel.Products = db.Products.Where(i => i.ComplianceForms.Count >=1)
+                   
                     .Include(i => i.ComplianceForms.Select(c => c.ComplianceCategory))
+                   
                      .OrderBy(i => i.ProductName);
                     break;
 
@@ -159,10 +161,14 @@ namespace ePro.Controllers
           
             var proditems = from a in db.ProductCompliance select a;
             ViewBag.ProdItems = new SelectList(proditems, "ProductListingID", "ProductName");
-           
-           // return View(viewModel);
-            //.ToPagedList(No_Of_Page, Size_Of_Page)
-           ViewBag.prdscomps = viewModel.Products.ToPagedList(EnrollmentPageNumber, 5);
+
+
+            decimal totalPages = ((decimal)(viewModel.Products.Count() / (decimal)pageSize));
+            ViewBag.TotalPages = Math.Ceiling(totalPages);
+            viewModel.Products = viewModel.Products.ToPagedList(pageNumber, pageSize);
+            ViewBag.OnePageOfProducts = viewModel.Products;
+            ViewBag.PageNumber = pageNumber;
+          
             return View(viewModel); 
            
         }
