@@ -16,13 +16,15 @@
     @Html.ActionLink("Create New", "../products/Create")
 </p>
 @using (Html.BeginForm())
- {
-     <p>
-         Type in a group name: @Html.TextBox("Search_Data", ViewBag.FilterValue as string)
-         <input type="submit" value="Find" />
-     </p>
-    
- }
+{
+    <table>
+        <tr>
+            <td>Type in product group name: @Html.TextBox("Search_Data", ViewBag.FilterValue as string)</td><td><input type="submit" value="Find" /></td>
+            <td>Type in product item code: @Html.TextBox("ItemCode_Search_Data", ViewBag.ItemCodeFilterValue as string)</td><td><input type="submit" value="Find" /></td>
+            <td>Type in product status: @Html.TextBox("Status_Search_Data", ViewBag.StatusFilterValue as string)</td><td><input type="submit" value="Find" /></td>
+       </tr>
+    </table>
+}
 
 <table class="table">
     <tr>
@@ -30,7 +32,13 @@
             @Html.ActionLink("Product Name", "Index", new { Sorting_Order = ViewBag.SortingName })
         </th>
         <th>
-            @Html.ActionLink("Group", "Index", new { Group_Sorting_Order = ViewBag.SortingGroup })
+            @Html.ActionLink("Product Code", "Index", new { ItemCode_Sorting_Order = ViewBag.SortingName })
+        </th>
+        <th>
+            @Html.ActionLink("Product Status", "Index", new { ItemCode_Sorting_Order = ViewBag.SortingName })
+        </th>
+        <th>
+            @Html.ActionLink("Product Group", "Index", new { Group_Sorting_Order = ViewBag.SortingGroup })
         </th>
        
        <th>
@@ -44,6 +52,12 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Group)

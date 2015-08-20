@@ -17,6 +17,8 @@ namespace ePro.Controllers
         private eProContext db = new eProContext();
 
         // GET: ComplianceForms
+        [Audit]
+        [Authorize] 
         public ActionResult Index(int? SelectedCompCat)
         {
 
@@ -36,6 +38,8 @@ namespace ePro.Controllers
         }
 
         // GET: ComplianceForms/Details/5
+        [Audit]
+        [Authorize] 
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -51,6 +55,8 @@ namespace ePro.Controllers
         }
 
         // GET: ComplianceForms/Create
+        [Audit]
+        [Authorize] 
         public ActionResult Create()
         {
             ViewBag.ComplianceCategoryID = new SelectList(db.ComplianceCategory, "ComplianceCategoryID", "Name");
@@ -70,6 +76,8 @@ namespace ePro.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
+        [Authorize] 
         public ActionResult Create([Bind(Include = "ComplianceFormID,Name,ComplianceCategoryID")] ComplianceForm complianceForm)
         {
             if (ModelState.IsValid)
@@ -84,6 +92,8 @@ namespace ePro.Controllers
         }
 
         // GET: ComplianceForms/Edit/5
+        [Audit]
+        [Authorize] 
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -104,6 +114,8 @@ namespace ePro.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
+        [Authorize] 
         public ActionResult Edit([Bind(Include = "ComplianceFormID,Name,ComplianceCategoryID")] ComplianceForm complianceForm)
        // [HttpPost, ActionName("Edit")]
        // [ValidateAntiForgeryToken]
@@ -140,6 +152,8 @@ namespace ePro.Controllers
         }
 
         // GET: ComplianceForms/Delete/5
+        [Audit]
+        [Authorize] 
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -157,6 +171,8 @@ namespace ePro.Controllers
         // POST: ComplianceForms/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Audit]
+        [Authorize] 
         public ActionResult DeleteConfirmed(int id)
         {
             ComplianceForm complianceForm = db.ComplianceForms.Find(id);

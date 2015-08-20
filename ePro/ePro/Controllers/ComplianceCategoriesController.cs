@@ -16,12 +16,16 @@ namespace ePro.Controllers
         private eProContext db = new eProContext();
 
         // GET: ComplianceCategories
+        [Audit]
+        [Authorize] 
         public ActionResult Index()
         {
             return View(db.ComplianceCategory.ToList());
         }
 
         // GET: ComplianceCategories/Details/5
+        [Audit]
+        [Authorize] 
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +41,8 @@ namespace ePro.Controllers
         }
 
         // GET: ComplianceCategories/Create
+        [Audit]
+        [Authorize] 
         public ActionResult Create()
         {
             return View();
@@ -47,6 +53,8 @@ namespace ePro.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
+        [Authorize] 
         public ActionResult Create([Bind(Include = "ComplianceCategoryID,Name")] ComplianceCategory complianceCategory)
         {
             if (ModelState.IsValid)
@@ -60,6 +68,8 @@ namespace ePro.Controllers
         }
 
         // GET: ComplianceCategories/Edit/5
+        [Audit]
+        [Authorize] 
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -79,6 +89,8 @@ namespace ePro.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
+        [Authorize] 
         public ActionResult Edit([Bind(Include = "ComplianceCategoryID,Name")] ComplianceCategory complianceCategory)
         {
             if (ModelState.IsValid)
@@ -91,6 +103,8 @@ namespace ePro.Controllers
         }
 
         // GET: ComplianceCategories/Delete/5
+        [Audit]
+        [Authorize] 
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -108,6 +122,8 @@ namespace ePro.Controllers
         // POST: ComplianceCategories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Audit]
+        [Authorize] 
         public ActionResult DeleteConfirmed(int id)
         {
             ComplianceCategory complianceCategory = db.ComplianceCategory.Find(id);

@@ -19,10 +19,13 @@ namespace ePro.Controllers
         private eProContext db = new eProContext();
 
         // GET: FullProductList
-        public ActionResult Index(string Sorting_Order, string Search_Data, int? Page_No)
+        [Audit]  
+        [Authorize] 
+        public ActionResult Index(string Status_Search_Data,string ItemCode_Search_Data ,string Sorting_Order, string Search_Data, int? Page_No)
         {
             ViewBag.SortingName = String.IsNullOrEmpty(Sorting_Order) ? "Name_Description" : "";
-            ViewBag.SortingGroup = Sorting_Order == "Group";
+            ViewBag.SortingGroup = Sorting_Order == "Product Group";
+            
            var prodlist = from prods in db.ProductListings select prods; 
            
              {
@@ -45,6 +48,33 @@ namespace ePro.Controllers
                  {
                      prodlist = prodlist.OrderByDescending(prods => prods.ProductListingID); 
 
+                 }
+                 if  (ItemCode_Search_Data != null )
+                 {
+                     if (ItemCode_Search_Data.Length>0)
+                     {
+                         prodlist = prodlist.Where(prd => prd.ItemCode.ToUpper().Contains(ItemCode_Search_Data.ToUpper()));
+                     }
+
+                     else
+                     {
+
+                         prodlist = prodlist.OrderByDescending(prods => prods.ProductListingID); 
+                     }
+                 }
+                
+                 if  (Status_Search_Data != null )
+                 {
+                     if (Status_Search_Data.Length > 0)
+                     {
+                         prodlist = prodlist.Where(prd => prd.Status.ToUpper().Contains(Status_Search_Data.ToUpper()));
+                     }
+
+                     else
+                     {
+
+                         prodlist = prodlist.OrderByDescending(prods => prods.ProductListingID); 
+                     }
                  }
   
              } 
@@ -70,7 +100,8 @@ namespace ePro.Controllers
              //return View(prodlist.ToList()); 
              //return View(db.ProductListings.ToList());
         }
-
+        [Audit]
+        [Authorize] 
         public ActionResult FileDownload(int fileid)
         {
             byte[] fileData;
@@ -87,6 +118,8 @@ namespace ePro.Controllers
         }
 
         // GET: FullProductList/Details/5
+        [Audit]
+        [Authorize] 
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -102,6 +135,8 @@ namespace ePro.Controllers
         }
 
         // GET: FullProductList/Create
+        [Audit]
+        [Authorize] 
         public ActionResult Create()
         {
             return View();
@@ -112,6 +147,8 @@ namespace ePro.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
+        [Authorize] 
         public ActionResult Create([Bind(Include = "ProductListingID,ProductName,Source,ItemCode,Group,ABCClass,Status,ControlCode,Cond,Indicator,CyclicCode,UserGroup,UserGroup1,ItemDescription,Description2,Description3,Unit,Weight,Pack,PackQty,Volume,ConversionFactor,AltUnitDesc,ItemGTIN,ModVAT,Trace,Storage,StandardCost,ReplacementCost,SalesCost,DutyPaidCost,InfoCost,ShelfLifeDays,WarrantyTypeFlag,DateLastChange,Per,ReorderPolicy,ReorderReview,ReorderBuyer,CreationDate,MovementCode,SalesType,SalesTaxPaidRate,SortCode,ExciseQty,UnSpscCode,AnalysisCode1,AnalysisCode2,AnalysisCode3,SpareAnalysisCode,stkTallyCode,Brand,OriginFlag,OriginSource,PriceProtection,StkSpare1,StkSpare2,StkUserOnlyDate1,StkUserOnlyDate2,StkUserOnlyAlpha201,StkUserOnlyAlpha202,StkUserOnlyAlpha41,StkUserOnlyAlpha42,StkUserOnlyAlpha43,StkUserOnlyAlpha44,StkUserOnlyNum1,StkUserOnlyNum2,StkUserOnlyNum3,StkUserOnlyNum4")] ProductListing productListing)
         {
             if (ModelState.IsValid)
@@ -125,6 +162,8 @@ namespace ePro.Controllers
         }
 
         // GET: FullProductList/Edit/5
+        [Audit]
+        [Authorize] 
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -144,6 +183,8 @@ namespace ePro.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
+        [Authorize] 
         public ActionResult Edit([Bind(Include = "ProductListingID,ProductName,Source,ItemCode,Group,ABCClass,Status,ControlCode,Cond,Indicator,CyclicCode,UserGroup,UserGroup1,ItemDescription,Description2,Description3,Unit,Weight,Pack,PackQty,Volume,ConversionFactor,AltUnitDesc,ItemGTIN,ModVAT,Trace,Storage,StandardCost,ReplacementCost,SalesCost,DutyPaidCost,InfoCost,ShelfLifeDays,WarrantyTypeFlag,DateLastChange,Per,ReorderPolicy,ReorderReview,ReorderBuyer,CreationDate,MovementCode,SalesType,SalesTaxPaidRate,SortCode,ExciseQty,UnSpscCode,AnalysisCode1,AnalysisCode2,AnalysisCode3,SpareAnalysisCode,stkTallyCode,Brand,OriginFlag,OriginSource,PriceProtection,StkSpare1,StkSpare2,StkUserOnlyDate1,StkUserOnlyDate2,StkUserOnlyAlpha201,StkUserOnlyAlpha202,StkUserOnlyAlpha41,StkUserOnlyAlpha42,StkUserOnlyAlpha43,StkUserOnlyAlpha44,StkUserOnlyNum1,StkUserOnlyNum2,StkUserOnlyNum3,StkUserOnlyNum4")] ProductListing productListing, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
@@ -156,6 +197,8 @@ namespace ePro.Controllers
         }
 
         // GET: FullProductList/Delete/5
+        [Audit]
+        [Authorize] 
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -173,6 +216,8 @@ namespace ePro.Controllers
         // POST: FullProductList/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Audit]
+        [Authorize] 
         public ActionResult DeleteConfirmed(int id)
         {
             ProductListing productListing = db.ProductListings.Find(id);

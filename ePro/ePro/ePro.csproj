@@ -184,6 +184,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AuditsController.cs" />
     <Compile Include="Controllers\ComplianceCategoriesController.cs" />
     <Compile Include="Controllers\ComplianceFormsController.cs" />
     <Compile Include="Controllers\ComplianceItemsController.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductListingsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ReportAuditingController.cs" />
     <Compile Include="Controllers\ReportProductCompliesController.cs" />
     <Compile Include="Controllers\ReportProductsAllController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
@@ -217,11 +219,16 @@
     <Compile Include="DB\eprocontext\201508110957383_initialcreate1.Designer.cs">
       <DependentUpon>201508110957383_initialcreate1.cs</DependentUpon>
     </Compile>
+    <Compile Include="DB\eprocontext\201508120711225_initialcreate2.cs" />
+    <Compile Include="DB\eprocontext\201508120711225_initialcreate2.Designer.cs">
+      <DependentUpon>201508120711225_initialcreate2.cs</DependentUpon>
+    </Compile>
     <Compile Include="DB\eprocontext\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Audit.cs" />
     <Compile Include="Models\Compliance.cs" />
     <Compile Include="Models\ComplianceCategory.cs" />
     <Compile Include="Models\ComplianceForm.cs" />
@@ -230,6 +237,7 @@
     <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PostingModel.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCompliance.cs" />
     <Compile Include="Models\ProductListing.cs" />
@@ -244,6 +252,13 @@
       <DependentUpon>ProductListing_DS.xsd</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\RptAuditList.aspx.cs">
+      <DependentUpon>RptAuditList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\RptAuditList.aspx.designer.cs">
+      <DependentUpon>RptAuditList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\RptProdComp.aspx.cs">
       <DependentUpon>RptProdComp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -268,6 +283,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_ePro_DB_eProContextDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="_ePro_DB_eProContextDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ePro_DB_eProContextDataSet.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -279,6 +299,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\cityscape.jpg" />
+    <Content Include="Reports\RptAuditList.aspx" />
     <Content Include="Reports\RptProdComp.aspx" />
     <Content Include="Reports\RptProds.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -421,9 +442,22 @@
     <Content Include="Views\ReportProductsAll\Index.cshtml" />
     <Content Include="Views\Help\Index.cshtml" />
     <Content Include="Views\ProductCompliance\Index.cshtml" />
+    <Content Include="_ePro_DB_eProContextDataSet.xsc">
+      <DependentUpon>_ePro_DB_eProContextDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Views\ReportAuditing\Index.cshtml" />
+    <None Include="_ePro_DB_eProContextDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_ePro_DB_eProContextDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="_ePro_DB_eProContextDataSet.xss">
+      <DependentUpon>_ePro_DB_eProContextDataSet.xsd</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Audits\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -449,6 +483,12 @@
     <EmbeddedResource Include="DB\eprocontext\201508110957383_initialcreate1.resx">
       <DependentUpon>201508110957383_initialcreate1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508120711225_initialcreate2.resx">
+      <DependentUpon>201508120711225_initialcreate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <Content Include="Reports\rptaudit.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
