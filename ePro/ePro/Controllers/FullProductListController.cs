@@ -20,62 +20,53 @@ namespace ePro.Controllers
 
         // GET: FullProductList
         [Audit]  
-        [Authorize] 
-        public ActionResult Index(string Status_Search_Data,string ItemCode_Search_Data ,string Sorting_Order, string Search_Data, int? Page_No)
+        [Authorize]
+        public ActionResult Index(string PrdCode, string PrdGrp, string ProdSts, string Sorting_Order, string Search_Data, int? Page_No)
         {
             ViewBag.SortingName = String.IsNullOrEmpty(Sorting_Order) ? "Name_Description" : "";
             ViewBag.SortingGroup = Sorting_Order == "Product Group";
             
+
+            //----Drop search--------------------------------
+            var ProdCodeLst = new List<string>();
+            var ProdCodeQry = from d in db.ProductListings
+                           orderby d.ItemCode
+                           select d.ItemCode;
+            ProdCodeLst.AddRange(ProdCodeQry.Distinct());
+            ViewBag.PrdCode = new SelectList(ProdCodeLst);
+            //------------------------------------------------
+            var ProdGrpLst = new List<string>();
+            var ProdGrpQry = from d in db.ProductListings
+                              orderby d.Group
+                             select d.Group;
+            ProdGrpLst.AddRange(ProdGrpQry.Distinct());
+            ViewBag.PrdGrp = new SelectList(ProdGrpLst);
+           //-------------------------------------------------
+            var ProdStsLst = new List<string>();
+            var ProdStsQry = from d in db.ProductListings
+                             orderby d.Status
+                             select d.Status;
+            ProdStsLst.AddRange(ProdStsQry.Distinct());
+            ViewBag.ProdSts = new SelectList(ProdStsLst);
+
+            //----End drop down search------------------------
            var prodlist = from prods in db.ProductListings select prods; 
-           
-             {
-                 if (Search_Data != null )
+            {
+                 
+               if (!string.IsNullOrEmpty(PrdCode))
                  {
-
-                     if (Search_Data.Length > 0)
-                     {
-                         prodlist = prodlist.Where(prd => prd.Group.ToUpper().Contains(Search_Data.ToUpper()));
-                     }
-                     else
-                     {
-                         prodlist = prodlist.OrderByDescending(prods => prods.ProductListingID); 
-
-                     }
-                     Page_No = 1;
-
+                      prodlist = prodlist.Where(prd => prd.ItemCode.ToUpper() == PrdCode);
                  }
-                 else
+
+               if (!string.IsNullOrEmpty(PrdGrp))
                  {
-                     prodlist = prodlist.OrderByDescending(prods => prods.ProductListingID); 
-
+                     prodlist = prodlist.Where(prd => prd.Group.ToUpper()==PrdGrp);
                  }
-                 if  (ItemCode_Search_Data != null )
-                 {
-                     if (ItemCode_Search_Data.Length>0)
-                     {
-                         prodlist = prodlist.Where(prd => prd.ItemCode.ToUpper().Contains(ItemCode_Search_Data.ToUpper()));
-                     }
+               if (!string.IsNullOrEmpty(ProdSts))
+               {
+                   prodlist = prodlist.Where(prd => prd.Status.ToUpper() == ProdSts);
+               }
 
-                     else
-                     {
-
-                         prodlist = prodlist.OrderByDescending(prods => prods.ProductListingID); 
-                     }
-                 }
-                
-                 if  (Status_Search_Data != null )
-                 {
-                     if (Status_Search_Data.Length > 0)
-                     {
-                         prodlist = prodlist.Where(prd => prd.Status.ToUpper().Contains(Status_Search_Data.ToUpper()));
-                     }
-
-                     else
-                     {
-
-                         prodlist = prodlist.OrderByDescending(prods => prods.ProductListingID); 
-                     }
-                 }
   
              } 
              switch(Sorting_Order) 

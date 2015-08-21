@@ -19,9 +19,9 @@
 {
     <table>
         <tr>
-            <td>Type in product group name: @Html.TextBox("Search_Data", ViewBag.FilterValue as string)</td><td><input type="submit" value="Find" /></td>
-            <td>Type in product item code: @Html.TextBox("ItemCode_Search_Data", ViewBag.ItemCodeFilterValue as string)</td><td><input type="submit" value="Find" /></td>
-            <td>Type in product status: @Html.TextBox("Status_Search_Data", ViewBag.StatusFilterValue as string)</td><td><input type="submit" value="Find" /></td>
+            <td>Product Group: @Html.DropDownList("PrdGrp", "All")</td>
+            <td>Product Code: @Html.DropDownList("PrdCode", "All")</td>
+            <td>Product Status: @Html.DropDownList("ProdSts", "All")</td><td><input type="submit" value="Find" /></td>
        </tr>
     </table>
 }
