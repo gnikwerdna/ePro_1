@@ -12,7 +12,13 @@
 <table class="table">
     <tr>
         <th>
+            Item Id
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.ItemName)
+        </th>
+        <th>
+           Subordinate Item Id
         </th>
         <th></th>
     </tr>
@@ -20,7 +26,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.ComplianceItemsID)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.ItemName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubItemTo)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ComplianceItemsID }) |

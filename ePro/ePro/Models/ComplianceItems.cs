@@ -13,6 +13,7 @@ namespace ePro.Models
         public int ComplianceItemsID { get; set; }
         public string ItemName { get; set; }
         public bool EndItem { get; set; }
+        public int SubItemTo { get; set; }
         public virtual ICollection<Compliance> Compliance { get; set; }
     }
 }

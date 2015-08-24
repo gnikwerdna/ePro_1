@@ -67,6 +67,13 @@ namespace ePro.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ComplianceItems complianceItems = db.ComplianceItems.Find(id);
+
+          
+            var ddcontent = from p in db.ComplianceItems orderby p.ItemName select new { p.ComplianceItemsID, p.ItemName };
+            var x = ddcontent.ToList().Select(c => new SelectListItem { Text = c.ItemName, Value = c.ComplianceItemsID.ToString() }).ToList();
+            ViewBag.ComplianceIts = x;
+                       
+
             if (complianceItems == null)
             {
                 return HttpNotFound();
@@ -79,7 +86,7 @@ namespace ePro.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ComplianceItemsID,ItemName,EndItem")] ComplianceItems complianceItems)
+        public ActionResult Edit([Bind(Include = "ComplianceItemsID,ItemName,EndItem,SubItemTo")] ComplianceItems complianceItems)
         {
             if (ModelState.IsValid)
             {

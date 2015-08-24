@@ -223,6 +223,10 @@
     <Compile Include="DB\eprocontext\201508120711225_initialcreate2.Designer.cs">
       <DependentUpon>201508120711225_initialcreate2.cs</DependentUpon>
     </Compile>
+    <Compile Include="DB\eprocontext\201508210833045_initialcreate3.cs" />
+    <Compile Include="DB\eprocontext\201508210833045_initialcreate3.Designer.cs">
+      <DependentUpon>201508210833045_initialcreate3.cs</DependentUpon>
+    </Compile>
     <Compile Include="DB\eprocontext\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -489,6 +493,9 @@
     <Content Include="Reports\rptaudit.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="DB\eprocontext\201508210833045_initialcreate3.resx">
+      <DependentUpon>201508210833045_initialcreate3.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
