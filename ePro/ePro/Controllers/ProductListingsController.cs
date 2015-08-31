@@ -153,9 +153,30 @@ namespace ePro.Controllers
 
                 viewModel.Compliances = selectedcomplianceform.Compliances.OrderBy(x=>x.Order);
             }
+            //Product compliance items
             var productcomp = (from p in db.ProductCompliance where p.ProductListingID == id select p);
             ViewBag.productcp = productcomp.ToList();
 
+            //Section to handle subordinate items
+            var productSubItem = from a in db.ComplianceItems
+                                 join s in db.ComplianceItemSubItems on a.ComplianceItemsID equals s.SubItemTo
+                                 select new SubItemsViewModel { SubItemTo = s.SubItemTo, ItemName = a.ItemName, ComplianceItemsID = s.ComplianceItemID };
+            if (productSubItem.Count()>1)
+            {
+                ViewBag.productSubItem = productSubItem.ToList();
+            }
+
+            //check if subordinate item is in the product compliances
+            //will end up here as another item
+            var subproductcomp = (from p in db.ProductCompliance
+                                  join s in db.ComplianceItemSubItems on p.ComplianceItemsID equals s.SubItemTo
+                                  where p.ProductListingID == id
+                                  select new SubItemsProductCompliance { ComplianceItemsID = s.ComplianceItemID, SubItemTo = s.SubItemTo, ProductListingID = p.ProductListingID, Checked = p.Checked });
+
+            ViewBag.productcpsub = subproductcomp.ToList();
+
+
+            //end section to handle subordinate itesm
             var proditems = from a in db.ProductCompliance select a;
             ViewBag.ProdItems = new SelectList(proditems, "ProductListingID", "ProductName");
 

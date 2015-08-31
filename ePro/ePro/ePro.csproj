@@ -227,6 +227,94 @@
     <Compile Include="DB\eprocontext\201508210833045_initialcreate3.Designer.cs">
       <DependentUpon>201508210833045_initialcreate3.cs</DependentUpon>
     </Compile>
+    <Compile Include="DB\eprocontext\201508261152424_initialcreate4.cs" />
+    <Compile Include="DB\eprocontext\201508261152424_initialcreate4.Designer.cs">
+      <DependentUpon>201508261152424_initialcreate4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508270956188_initialcreate5.cs" />
+    <Compile Include="DB\eprocontext\201508270956188_initialcreate5.Designer.cs">
+      <DependentUpon>201508270956188_initialcreate5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508271002270_initialcreate6.cs" />
+    <Compile Include="DB\eprocontext\201508271002270_initialcreate6.Designer.cs">
+      <DependentUpon>201508271002270_initialcreate6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508271006510_initialcreate7.cs" />
+    <Compile Include="DB\eprocontext\201508271006510_initialcreate7.Designer.cs">
+      <DependentUpon>201508271006510_initialcreate7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508271011336_initialcreate8.cs" />
+    <Compile Include="DB\eprocontext\201508271011336_initialcreate8.Designer.cs">
+      <DependentUpon>201508271011336_initialcreate8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508271024238_initialcreate9.cs" />
+    <Compile Include="DB\eprocontext\201508271024238_initialcreate9.Designer.cs">
+      <DependentUpon>201508271024238_initialcreate9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508271057499_initialcreate10.cs" />
+    <Compile Include="DB\eprocontext\201508271057499_initialcreate10.Designer.cs">
+      <DependentUpon>201508271057499_initialcreate10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508271100170_initialcreate11.cs" />
+    <Compile Include="DB\eprocontext\201508271100170_initialcreate11.Designer.cs">
+      <DependentUpon>201508271100170_initialcreate11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508271115482_initialcreate12.cs" />
+    <Compile Include="DB\eprocontext\201508271115482_initialcreate12.Designer.cs">
+      <DependentUpon>201508271115482_initialcreate12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508271242098_initialcreate13.cs" />
+    <Compile Include="DB\eprocontext\201508271242098_initialcreate13.Designer.cs">
+      <DependentUpon>201508271242098_initialcreate13.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508271244599_initialcreate14.cs" />
+    <Compile Include="DB\eprocontext\201508271244599_initialcreate14.Designer.cs">
+      <DependentUpon>201508271244599_initialcreate14.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508271249386_initialcreate15.cs" />
+    <Compile Include="DB\eprocontext\201508271249386_initialcreate15.Designer.cs">
+      <DependentUpon>201508271249386_initialcreate15.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508271253472_initialcreate16.cs" />
+    <Compile Include="DB\eprocontext\201508271253472_initialcreate16.Designer.cs">
+      <DependentUpon>201508271253472_initialcreate16.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508271258360_initialcreate17.cs" />
+    <Compile Include="DB\eprocontext\201508271258360_initialcreate17.Designer.cs">
+      <DependentUpon>201508271258360_initialcreate17.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508271306208_initialcreate18.cs" />
+    <Compile Include="DB\eprocontext\201508271306208_initialcreate18.Designer.cs">
+      <DependentUpon>201508271306208_initialcreate18.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508290346187_initialcreate19.cs" />
+    <Compile Include="DB\eprocontext\201508290346187_initialcreate19.Designer.cs">
+      <DependentUpon>201508290346187_initialcreate19.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508290349436_initialcreate20.cs" />
+    <Compile Include="DB\eprocontext\201508290349436_initialcreate20.Designer.cs">
+      <DependentUpon>201508290349436_initialcreate20.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508290425330_initialcreate21.cs" />
+    <Compile Include="DB\eprocontext\201508290425330_initialcreate21.Designer.cs">
+      <DependentUpon>201508290425330_initialcreate21.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508300134196_initialcreate22.cs" />
+    <Compile Include="DB\eprocontext\201508300134196_initialcreate22.Designer.cs">
+      <DependentUpon>201508300134196_initialcreate22.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508300146025_initialcreate23.cs" />
+    <Compile Include="DB\eprocontext\201508300146025_initialcreate23.Designer.cs">
+      <DependentUpon>201508300146025_initialcreate23.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508310909073_initialcreate24.cs" />
+    <Compile Include="DB\eprocontext\201508310909073_initialcreate24.Designer.cs">
+      <DependentUpon>201508310909073_initialcreate24.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\eprocontext\201508310949552_initialcreate25.cs" />
+    <Compile Include="DB\eprocontext\201508310949552_initialcreate25.Designer.cs">
+      <DependentUpon>201508310949552_initialcreate25.cs</DependentUpon>
+    </Compile>
     <Compile Include="DB\eprocontext\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -236,7 +324,10 @@
     <Compile Include="Models\Compliance.cs" />
     <Compile Include="Models\ComplianceCategory.cs" />
     <Compile Include="Models\ComplianceForm.cs" />
-    <Compile Include="Models\ComplianceItems.cs" />
+    <Compile Include="Models\ComplianceItems.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ComplianceItemSubItem.cs" />
     <Compile Include="Models\File.cs" />
     <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -287,6 +378,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_ePro_DB_eProContextDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\SubItemsProductCompliance.cs" />
+    <Compile Include="ViewModels\SubItemsViewModel.cs" />
     <Compile Include="_ePro_DB_eProContextDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -495,6 +588,72 @@
     </Content>
     <EmbeddedResource Include="DB\eprocontext\201508210833045_initialcreate3.resx">
       <DependentUpon>201508210833045_initialcreate3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508261152424_initialcreate4.resx">
+      <DependentUpon>201508261152424_initialcreate4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508270956188_initialcreate5.resx">
+      <DependentUpon>201508270956188_initialcreate5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508271002270_initialcreate6.resx">
+      <DependentUpon>201508271002270_initialcreate6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508271006510_initialcreate7.resx">
+      <DependentUpon>201508271006510_initialcreate7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508271011336_initialcreate8.resx">
+      <DependentUpon>201508271011336_initialcreate8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508271024238_initialcreate9.resx">
+      <DependentUpon>201508271024238_initialcreate9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508271057499_initialcreate10.resx">
+      <DependentUpon>201508271057499_initialcreate10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508271100170_initialcreate11.resx">
+      <DependentUpon>201508271100170_initialcreate11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508271115482_initialcreate12.resx">
+      <DependentUpon>201508271115482_initialcreate12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508271242098_initialcreate13.resx">
+      <DependentUpon>201508271242098_initialcreate13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508271244599_initialcreate14.resx">
+      <DependentUpon>201508271244599_initialcreate14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508271249386_initialcreate15.resx">
+      <DependentUpon>201508271249386_initialcreate15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508271253472_initialcreate16.resx">
+      <DependentUpon>201508271253472_initialcreate16.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508271258360_initialcreate17.resx">
+      <DependentUpon>201508271258360_initialcreate17.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508271306208_initialcreate18.resx">
+      <DependentUpon>201508271306208_initialcreate18.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508290346187_initialcreate19.resx">
+      <DependentUpon>201508290346187_initialcreate19.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508290349436_initialcreate20.resx">
+      <DependentUpon>201508290349436_initialcreate20.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508290425330_initialcreate21.resx">
+      <DependentUpon>201508290425330_initialcreate21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508300134196_initialcreate22.resx">
+      <DependentUpon>201508300134196_initialcreate22.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508300146025_initialcreate23.resx">
+      <DependentUpon>201508300146025_initialcreate23.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508310909073_initialcreate24.resx">
+      <DependentUpon>201508310909073_initialcreate24.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DB\eprocontext\201508310949552_initialcreate25.resx">
+      <DependentUpon>201508310949552_initialcreate25.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

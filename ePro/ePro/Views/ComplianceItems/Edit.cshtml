@@ -25,10 +25,10 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.SubItemTo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Select Sub Item", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
            
-                @Html.DropDownListFor(model => model.SubItemTo, ViewBag.ComplianceIts as IEnumerable<SelectListItem>, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.SubItemTo, ViewBag.ComplianceIts as IEnumerable<SelectListItem>, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ComplianceItemsID)
 
 

@@ -9,7 +9,7 @@ namespace ePro.DB.eprocontext
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             MigrationsDirectory = @"DB\eprocontext";
         }
 

@@ -100,7 +100,65 @@
                     
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Description)
+                            <table>
+                                @Html.DisplayFor(modelItem => item.Description)
+                             
+
+                                  @foreach (var sub in ViewBag.productSubItem)
+                                    {
+                                        if (item.ComplianceItem.ComplianceItemsID == sub.ComplianceItemsID)
+                                         {
+                                            <tr>
+                                                <td>
+                                                   
+                                                    @sub.ComplianceItemsID
+                                                </td>
+                                                
+                                                <td>
+                                                    @sub.ItemName
+                                                    
+                                                    @{bool blnSubflag = true;}
+                                                    @{int intSubcounter = 0;}
+                                                    @foreach (var s in ViewBag.productcpsub)
+                                                    {
+                                                        if (s.SubItemTo == item.ComplianceitemsID)
+                                                        {
+                                                            if (s.Checked == 1)
+                                                            {
+                                                                @Html.ActionLink("Remove ", "Index", new { ComplianceFormID = item.ComplianceFormID, compid = s.SubItemTo, enditem = item.ComplianceItem.EndItem })
+                                                                blnSubflag = false;
+                                                            }
+                                                            else
+                                                            {
+
+                                                                intSubcounter++;
+                                                                blnSubflag = true;
+
+                                                            }
+
+                                                        
+                                                    
+                                                
+                                                   
+                                                   }
+                                                  }
+                                                    @if (@blnSubflag == true)
+                                                    {
+                                                        @Html.ActionLink("Add ", "Index", new { ComplianceFormID = item.ComplianceFormID, compid = sub.SubItemTo, enditem = item.ComplianceItem.EndItem })
+                                                    }
+                                                </td>
+                                                @if (item.ComplianceItem.EndItem == true && blnSubflag == false)
+                                                {
+                                                    break;
+                                                }
+
+                                            </tr>
+                                        }
+                                    }
+
+                               
+                            </table>
+
                         </td>
                          <td>
                              @{bool blnflag = true;}

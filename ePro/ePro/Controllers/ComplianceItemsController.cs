@@ -52,6 +52,7 @@ namespace ePro.Controllers
             if (ModelState.IsValid)
             {
                 db.ComplianceItems.Add(complianceItems);
+                //db.ComplianceItems.Add()
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -86,17 +87,30 @@ namespace ePro.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ComplianceItemsID,ItemName,EndItem,SubItemTo")] ComplianceItems complianceItems)
+        public ActionResult Edit([Bind(Include = "ComplianceItemsID,ItemName,EndItem,SubItemTo")] ComplianceItems complianceItems, int SubItemTo, int ComplianceItemsID)
         {
             if (ModelState.IsValid)
             {
+                
+                AddRelCompItems(ComplianceItemsID, SubItemTo);
+                
                 db.Entry(complianceItems).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(complianceItems);
         }
+        public void AddRelCompItems( int CompItemId, int SubItemId)
+        {
 
+            var newSubitem = new ComplianceItemSubItem();
+            newSubitem.ComplianceItemID = CompItemId;
+            newSubitem.SubItemTo = SubItemId;
+            db.ComplianceItemSubItems.Add(newSubitem);
+            db.SaveChanges();
+
+        
+        }
         // GET: ComplianceItems/Delete/5
         public ActionResult Delete(int? id)
         {

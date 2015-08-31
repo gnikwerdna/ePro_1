@@ -18,6 +18,8 @@ namespace ePro.DB
         public DbSet<ProductListing> ProductListings { get; set; }
         public DbSet<File> Files { get; set; }
         public DbSet<Audit> AuditRecords { get; set; }
+        public DbSet<ComplianceItemSubItem> ComplianceItemSubItems { get; set; }
+        
 
        
         
