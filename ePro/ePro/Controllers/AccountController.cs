@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ePro.Models;
+using System.Net.Mail;
 
 namespace ePro.Controllers
 {
@@ -211,16 +212,50 @@ namespace ePro.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                 SendEMail(user.Email, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+        private void SendEMail(string emailid, string subject, string body)
+        {
+             System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
+             client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+             client.EnableSsl = true;
+             client.Host = "smtp.gmail.com";
+             client.Port = 587;
 
+
+             System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("aksmtpdev@gmail.com", "gnikW3rdna");
+             client.UseDefaultCredentials = false;
+             client.Credentials = credentials;
+
+             System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+             msg.From = new MailAddress("aksmtpdev@gmail.com");
+             msg.To.Add(new MailAddress(emailid));
+
+             msg.Subject = subject;
+             msg.IsBodyHtml = true;
+             msg.Body = body;
+
+             client.Send(msg);
+            //MailMessage mail = new MailMessage();
+            //mail.To.Add(emailid);
+            //mail.From = new MailAddress("korowabooks@gmail.com");
+            //mail.Subject = subject;
+            //mail.Body = body;
+            //mail.IsBodyHtml = true;
+            //SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            //smtp.EnableSsl = true;
+            //smtp.UseDefaultCredentials = false;
+            //smtp.Credentials = new System.Net.NetworkCredential("korowabooks@gmail.com", "Kags@2013");
+            //smtp.Send(mail);
+        }
         //
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]

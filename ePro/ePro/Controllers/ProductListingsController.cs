@@ -94,7 +94,7 @@ namespace ePro.Controllers
 
 
         // GET: Products
-        public ActionResult Index(int? id, int? complianceformID, int? compid, bool? enditem)
+        public ActionResult Index(int? id, int? complianceformID, int? compid, bool? enditem, int? compidsub)
         {
 
             var viewModel = new ProductIndexData();
@@ -102,6 +102,7 @@ namespace ePro.Controllers
             {
                 int? updprodid = id;
                 int? upcompid = compid;
+                
                 AddComplianceProduct(updprodid, upcompid, 1,enditem);
             }
 
@@ -160,6 +161,8 @@ namespace ePro.Controllers
             //Section to handle subordinate items
             var productSubItem = from a in db.ComplianceItems
                                  join s in db.ComplianceItemSubItems on a.ComplianceItemsID equals s.SubItemTo
+                                // join p in db.ProductCompliance on s.SubItemTo equals p.ComplianceItemsID  
+                                 //select new SubItemsViewModel { SubItemTo = s.SubItemTo, ItemName = a.ItemName, ComplianceItemsID = s.ComplianceItemID, Checked = p.Checked };
                                  select new SubItemsViewModel { SubItemTo = s.SubItemTo, ItemName = a.ItemName, ComplianceItemsID = s.ComplianceItemID };
             if (productSubItem.Count()>1)
             {
@@ -170,7 +173,7 @@ namespace ePro.Controllers
             //will end up here as another item
             var subproductcomp = (from p in db.ProductCompliance
                                   join s in db.ComplianceItemSubItems on p.ComplianceItemsID equals s.SubItemTo
-                                  where p.ProductListingID == id
+                                  //where p.ProductListingID == id
                                   select new SubItemsProductCompliance { ComplianceItemsID = s.ComplianceItemID, SubItemTo = s.SubItemTo, ProductListingID = p.ProductListingID, Checked = p.Checked });
 
             ViewBag.productcpsub = subproductcomp.ToList();

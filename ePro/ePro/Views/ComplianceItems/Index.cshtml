@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<ePro.Models.ComplianceItems>
+@using PagedList;
+@using PagedList.Mvc;
 
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Index";
 }
@@ -18,7 +21,7 @@
             @Html.DisplayNameFor(model => model.ItemName)
         </th>
         <th>
-           Subordinate Item Id
+           Sub compliance items
         </th>
         <th></th>
     </tr>
@@ -31,8 +34,41 @@
         <td>
             @Html.DisplayFor(modelItem => item.ItemName)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubItemTo)
+        <td >
+            <style>
+               .intd
+               {
+                   border-top-style:none!important;
+               }            
+
+            </style>
+            <table>
+            
+               @if (ViewBag.productSubItem!=null)
+                {
+                foreach (var sub in ViewBag.productSubItem)
+                {
+                    if (item.ComplianceItemsID == sub.ComplianceItemsID)
+                    {
+                        <tr>
+                            <td class="intd">
+                                @sub.SubItemTo
+                            </td>
+                            <td>
+                                @sub.ItemName
+                            </td>
+                            <td>@Html.ActionLink("Remove ", "Remove", new { itemid = sub.ComplianceItemsID, subitemid = sub.SubItemTo })</td>
+
+                        </tr>
+                    }
+                    if (sub.Equals(null))
+                    {
+                        break;
+                    }
+                }
+                }
+            </table>
+
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ComplianceItemsID }) |
@@ -43,3 +79,12 @@
 }
 
 </table>
+<div>
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+    Page @ViewBag.PageNumber of @ViewBag.TotalPages
+
+    @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Index", new { page }))
+
+
+</div>
+

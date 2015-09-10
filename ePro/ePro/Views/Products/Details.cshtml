@@ -1,13 +1,13 @@
 ﻿@model ePro.Models.Product
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "";
 }
 
 <h2>Details</h2>
 
 <div>
-    <h4>Product</h4>
+    <h4>Product Details</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -32,6 +32,29 @@
 
         <dd>
             @Html.DisplayFor(model => model.Source)
+        </dd>
+        <dt>
+            Attached Files
+        </dt>
+        <dd>
+            @foreach (var a in ViewBag.filelist)
+            {
+                <table>
+                    <tr>
+                        <td>
+
+                            @Html.ActionLink((string)a.FileName ,"Getfile", new { id = a.FileId })
+                        </td>
+                        <td>
+
+                            @Html.ActionLink("Delete", "DeleteFile", new { id = a.FileId })
+                        </td>
+                    </tr>
+                </table>
+            }
+
+
+
         </dd>
 
     </dl>

@@ -122,6 +122,8 @@ namespace ePro.Controllers
             {
                 return HttpNotFound();
             }
+            var associatedfiles = (from p in db.Files where p.ProductListingID == id select p);
+            ViewBag.filelist = associatedfiles.ToList();
             return View(productListing);
         }
 

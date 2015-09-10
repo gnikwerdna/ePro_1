@@ -9,7 +9,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Products</h2>
+<h2>Compliant Products</h2>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -57,7 +57,8 @@
                 @Html.ActionLink("Select", "Index", new { id = item.ProductListingID }) |
                 @Html.ActionLink("Edit", "Edit", new { id = item.ProductListingID }) |
                 @Html.ActionLink("Details", "Details", new { id = item.ProductListingID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProductListingID })
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductListingID })|
+                @Html.ActionLink("Add files", "Uploader", new { id = item.ProductListingID })
             </td>
 
             @{ long prodid = item.ProductListingID;}

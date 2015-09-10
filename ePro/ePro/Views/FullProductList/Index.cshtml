@@ -90,7 +90,8 @@
             @Html.ActionLink("Compliance", "../ProductListings/Index", new { id = item.ProductListingID }) |
             @Html.ActionLink("Edit", "../products/Edit", new { id=item.ProductListingID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ProductListingID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductListingID })
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProductListingID })|
+            @Html.ActionLink("Add files", "../products/Uploader", new { id = item.ProductListingID })
         </td>
     </tr>
 }

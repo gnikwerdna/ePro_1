@@ -1,0 +1,36 @@
+﻿@model ePro.Models.Product
+
+@{
+    ViewBag.Title = "Uploader";
+}
+
+<h2>Attach files to product</h2>
+
+@using (Html.BeginForm("Uploader", "Products", new { id = ViewBag.productid }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+       
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ProductListingID)
+          
+            <input type="file" name="FileUpload1" /><br />
+            <input type="file" name="FileUpload2" /><br />
+            <input type="file" name="FileUpload3" /><br />
+            <input type="file" name="FileUpload4" /><br />
+            <input type="file" name="FileUpload5" /><br />
+ 
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Upload" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "../FullProductList/Index")
+</div>

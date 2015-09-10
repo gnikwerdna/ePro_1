@@ -319,6 +319,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\FileUploadHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Audit.cs" />
     <Compile Include="Models\Compliance.cs" />
@@ -543,6 +544,7 @@
       <DependentUpon>_ePro_DB_eProContextDataSet.xsd</DependentUpon>
     </Content>
     <Content Include="Views\ReportAuditing\Index.cshtml" />
+    <Content Include="Views\Products\Uploader.cshtml" />
     <None Include="_ePro_DB_eProContextDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>_ePro_DB_eProContextDataSet.Designer.cs</LastGenOutput>

@@ -13,6 +13,8 @@ using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Configuration;
 using PagedList;
+using ePro.Helpers;
+
 
 
 namespace ePro.Controllers
@@ -185,6 +187,8 @@ namespace ePro.Controllers
             {
                 return HttpNotFound();
             }
+            var associatedfiles = (from p in db.Files where p.ProductListingID == id select p);
+            ViewBag.filelist = associatedfiles.ToList();
             return View(product);
         }
 
@@ -383,6 +387,97 @@ namespace ePro.Controllers
             return View(product);
         }
 
+        //multiple file uploader
+       // Get:
+      [HttpGet]
+      public ActionResult Uploader(int id) 
+        {
+            Product product = db.Products.Find(id);
+            ViewBag.productid = id;
+            return View(product); 
+         }
+
+
+
+       [HttpPost]
+       [ValidateAntiForgeryToken]
+      public ActionResult Uploader(int? id)
+        {
+
+            foreach(string uploads in Request.Files)
+            {
+                if (!Request.Files[uploads].HasFile()) continue;
+                int ProductListingID = id.GetValueOrDefault(0);
+                if (ProductListingID != 0)
+                {
+                    int FileType = 1;
+                    string mimeType = Request.Files[uploads].ContentType;
+                    System.IO.Stream fileStream = Request.Files[uploads].InputStream;
+                    string fileName = System.IO.Path.GetFileName(Request.Files[uploads].FileName);
+                    int fileLength = Request.Files[uploads].ContentLength;
+                    byte[] fileData = new byte[fileLength];
+                    fileStream.Read(fileData, 0, fileLength);
+                    string connect = ConfigurationManager.ConnectionStrings["cmdstrings"].ToString();
+                    using (var conn = new SqlConnection(connect))
+                    {
+                        var qry = "INSERT INTO Files (Content, ContentType, FileName,ProductListingID,FileType) VALUES (@FileContent, @MimeType, @FileName,@ProductListingID,@FileType)";
+                        var cmd = new SqlCommand(qry, conn);
+                        cmd.Parameters.AddWithValue("@FileContent", fileData);
+                        cmd.Parameters.AddWithValue("@MimeType", mimeType);
+                        cmd.Parameters.AddWithValue("@FileName", fileName);
+                        cmd.Parameters.AddWithValue("@ProductListingID", ProductListingID);
+                        cmd.Parameters.AddWithValue("@FileType", FileType);
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+            }
+
+            return RedirectToAction("../FullProductList/Index");
+        }
+
+       [Audit]
+       [Authorize]
+       public FileContentResult GetFile(int id)
+       {
+           SqlDataReader rdr; byte[] fileContent = null;
+           string mimeType = ""; string fileName = "";
+           string connect = ConfigurationManager.ConnectionStrings["cmdstrings"].ToString();
+
+           using (var conn = new SqlConnection(connect))
+           {
+               var qry = "SELECT Content, ContentType, FileName FROM Files WHERE FileId = @ID";
+               var cmd = new SqlCommand(qry, conn);
+               cmd.Parameters.AddWithValue("@ID", id);
+               conn.Open();
+               rdr = cmd.ExecuteReader();
+               if (rdr.HasRows)
+               {
+                   rdr.Read();
+                   fileContent = (byte[])rdr["Content"];
+                   mimeType = rdr["ContentType"].ToString();
+                   fileName = rdr["FileName"].ToString();
+               }
+           }
+           return File(fileContent, mimeType, fileName);
+       }
+       public ActionResult DeleteFile(int id)
+       {
+          
+           string connect = ConfigurationManager.ConnectionStrings["cmdstrings"].ToString();
+
+           using (var conn = new SqlConnection(connect))
+           {
+               var qry = "Delete FROM Files WHERE FileId = @ID";
+               var cmd = new SqlCommand(qry, conn);
+               cmd.Parameters.AddWithValue("@ID", id);
+               conn.Open();
+               cmd.ExecuteReader();
+              
+           }
+           return RedirectToAction("../FullProductList/Index");
+       }
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

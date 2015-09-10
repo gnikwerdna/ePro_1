@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using ePro.DB;
 using ePro.Models;
+using ePro.ViewModels;
+using PagedList;
 
 namespace ePro.Controllers
 {
@@ -16,8 +18,27 @@ namespace ePro.Controllers
         private eProContext db = new eProContext();
 
         // GET: ComplianceItems
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
+            int pageSize = 14;
+            int pageNumber = (page ?? 1);
+            var viewModel = new ComplianceItems();
+            var productSubItem = from a in db.ComplianceItems
+                                 join s in db.ComplianceItemSubItems on a.ComplianceItemsID equals s.SubItemTo
+                                 orderby a.ItemName
+                                 // join p in db.ProductCompliance on s.SubItemTo equals p.ComplianceItemsID  
+                                 //select new SubItemsViewModel { SubItemTo = s.SubItemTo, ItemName = a.ItemName, ComplianceItemsID = s.ComplianceItemID, Checked = p.Checked };
+                                 select new SubItemsViewModel { SubItemTo = s.SubItemTo, ItemName = a.ItemName, ComplianceItemsID = s.ComplianceItemID };
+            if (productSubItem.Count() > 1)
+            {
+                ViewBag.productSubItem = productSubItem.ToList();
+            }
+            decimal totalPages = ((decimal)(productSubItem.Count() / (decimal)pageSize));
+            ViewBag.TotalPages = Math.Ceiling(totalPages);
+            //viewModel.Products = viewModel.Products.ToPagedList(pageNumber, pageSize);
+
+            ViewBag.OnePageOfProducts = productSubItem.ToPagedList(pageNumber, pageSize);
+            ViewBag.PageNumber = pageNumber;
             return View(db.ComplianceItems.ToList());
         }
 
@@ -69,11 +90,11 @@ namespace ePro.Controllers
             }
             ComplianceItems complianceItems = db.ComplianceItems.Find(id);
 
-          
+
             var ddcontent = from p in db.ComplianceItems orderby p.ItemName select new { p.ComplianceItemsID, p.ItemName };
             var x = ddcontent.ToList().Select(c => new SelectListItem { Text = c.ItemName, Value = c.ComplianceItemsID.ToString() }).ToList();
             ViewBag.ComplianceIts = x;
-                       
+
 
             if (complianceItems == null)
             {
@@ -91,16 +112,16 @@ namespace ePro.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 AddRelCompItems(ComplianceItemsID, SubItemTo);
-                
+
                 db.Entry(complianceItems).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(complianceItems);
         }
-        public void AddRelCompItems( int CompItemId, int SubItemId)
+        public void AddRelCompItems(int CompItemId, int SubItemId)
         {
 
             var newSubitem = new ComplianceItemSubItem();
@@ -109,7 +130,19 @@ namespace ePro.Controllers
             db.ComplianceItemSubItems.Add(newSubitem);
             db.SaveChanges();
 
-        
+
+        }
+        public ActionResult Remove(int itemid, int subitemid)
+        {
+
+            List<ComplianceItemSubItem> list = (from sub in db.ComplianceItemSubItems where sub.ComplianceItemID == itemid && sub.SubItemTo == subitemid select sub).ToList();
+            foreach (ComplianceItemSubItem its in list)
+            {
+                db.ComplianceItemSubItems.Remove(its);
+
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
         // GET: ComplianceItems/Delete/5
         public ActionResult Delete(int? id)
